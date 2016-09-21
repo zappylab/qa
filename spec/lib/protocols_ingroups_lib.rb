@@ -16,5 +16,9 @@ module ProtocolsInGroupModule
 			find("#delete-group-btn").click
 			page.has_selector?("#s-mce-img")
 		end
+
+		def accept_invite
+			find(:xpath, ".//span[contains(text(), 'Confirm membership')]").click
+		end
 	end
 end

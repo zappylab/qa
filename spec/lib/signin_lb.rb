@@ -17,6 +17,12 @@ module SignInModule
       find(:xpath, './/div[@class="sign-btn"]').click
       page.has_selector?(:xpath, './/div[@class="ul-page"]')
     end
+
+    def sign_out
+      find(:xpath, ".//*[@class='avatar']").click
+      find(:xpath, ".//span[@class='dropdown-right']/a[contains(@href, 'signout')]").click
+      page.has_selector?("#app")
+    end
   end
 end
 

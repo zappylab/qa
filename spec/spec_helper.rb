@@ -16,6 +16,7 @@
 # users commonly want.
 #
 require 'capybara/rspec'
+require 'capybara-screenshot/rspec'
 require 'capybara'
 require 'capybara/dsl'
 
@@ -36,6 +37,8 @@ require './lib/protocols_start_page_lib.rb'
 file = File.read('browsers.json')
 data_hash = JSON.parse(file)
 
+Capybara::Screenshot.autosave_on_failure = true
+
 Capybara.configure do |config|
   env = data_hash['TestProfile'][0]['browser']
   if env == 'firefox'
@@ -47,7 +50,7 @@ Capybara.configure do |config|
       Capybara::Selenium::Driver.new(app, :browser => :chrome)
     end
   end
-  Capybara.default_max_wait_time = 25
+  Capybara.default_max_wait_time = 15
   config.run_server = false
   config.default_driver = :selenium
   config.app_host = 'https://www.google.com' # change url
@@ -72,9 +75,9 @@ RSpec.configure do |config|
   config.before(:each) do
      Capybara.page.driver.browser.manage.window.maximize
   end
-  # config.after(:each) do
-  #   Capybara.reset_sessions!
-  # end
+  config.after(:each) do
+    Capybara.reset_sessions!
+  end
 
     # This option will default to `true` in RSpec 4. It makes the `description`
     # and `failure_message` of custom matchers include text for helper methods

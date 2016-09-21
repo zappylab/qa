@@ -1,3 +1,6 @@
 ChromeDriver/
 *.yardopts
 *.exe
+*.html
+*.png
+*.log

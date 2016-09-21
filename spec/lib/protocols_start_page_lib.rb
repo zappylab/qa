@@ -32,10 +32,9 @@ module ProtocolsStartPageModule
 			find(:xpath, ".//div[@class='help-btns']/ul/li/i[@class='p-font pf-users']").click
     	end
 
-    	def accept_invite
+    	def search_join_group
     		find_all(:xpath, ".//span[contains(text(), 'You are invited to join this group')]/a")[0].click
     		page.has_selector?(:xpath, ".//div[@class='community-logo']")
-    		find(:xpath, ".//span[contains(text(), 'Confirm membership')]").click
     	end
 	end
 end
