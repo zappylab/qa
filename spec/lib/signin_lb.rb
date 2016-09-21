@@ -10,8 +10,6 @@ module SignInModule
     # @example
     #   sign_in('protocolsuitest@gmail.com', 'protocols-ui-123')
     def sign_in(email, pass)
-      user_email = 'protocolsuitest@gmail.com'
-      user_pass = 'protocols-ui-123'
       visit('http://je-protocols')
       click_link('sign-in-header')
       find(:xpath, './/input[@id="email"]').set(email)

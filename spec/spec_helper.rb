@@ -22,8 +22,15 @@ require 'capybara/dsl'
 require 'json'
 require 'rubygems'
 
+            #connected modules#
 require './lib/signin_lb.rb'
 require './lib/signup_lb.rb'
+require './lib/user_profile_lib.rb'
+require './lib/protocols_groups_lib.rb'
+require './lib/protocols_ingroups_lib.rb'
+require './lib/protocols_start_page_lib.rb'
+            #connected modules#
+
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
 file = File.read('browsers.json')
@@ -40,7 +47,7 @@ Capybara.configure do |config|
       Capybara::Selenium::Driver.new(app, :browser => :chrome)
     end
   end
-  Capybara.default_max_wait_time = 15
+  Capybara.default_max_wait_time = 25
   config.run_server = false
   config.default_driver = :selenium
   config.app_host = 'https://www.google.com' # change url
@@ -51,8 +58,16 @@ RSpec.configure do |config|
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
   config.expect_with :rspec do |expectations|
+
+            #connected modules#
   config.include SignUpModule::Test#, type: :feature
   config.include SignInModule::Test#s, type: :feature
+  config.include UserProfileModule::Test
+  config.include ProtocolsStartPageModule::Test
+  config.include ProtocolsGroupModule::Test
+  config.include ProtocolsInGroupModule::Test
+            #connected modules#
+
   config.include Capybara::DSL
   config.before(:each) do
      Capybara.page.driver.browser.manage.window.maximize
