@@ -3,7 +3,7 @@ require 'capybara/dsl'
 module GoogleEmailModule
   class GoogleEmailClass
     include Capybara::DSL
-    link = 'http://je-protocols'
+    link = 'http://dev.protocols.io/' #'http://je-protocols'
     # @note This method is used to confirm new account 
     # @example
     #   verify_email('protocolsuitest@gmail.com', 'protocols-ui-123', verifying)    
