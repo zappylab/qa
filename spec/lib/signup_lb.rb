@@ -3,7 +3,7 @@ require 'capybara/dsl'
 module GoogleEmailModule
   class GoogleEmailClass
     include Capybara::DSL
-    link = 'http://dev.protocols.io/' #'http://je-protocols'
+    $link = 'http://sience:awesome@dev.protocols.io/' #'http://je-protocols'
     # @note This method is used to confirm new account 
     # @example
     #   verify_email('protocolsuitest@gmail.com', 'protocols-ui-123', verifying)    
@@ -93,7 +93,7 @@ module GoogleEmailModule
       Capybara.reset_sessions!
       # page.execute_script("sessionStorage.clear();")
       # page.execute_script("localStorage.clear();")
-      visit(link) 
+      visit($link) 
     end
   end
 end

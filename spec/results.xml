@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="rspec" tests="1" failures="0" errors="0" time="43.466567" timestamp="2016-09-30T18:26:02+03:00">
-  <!-- Randomized with seed 8396 -->
-  <properties/>
-  <testcase classname="test_spec" name="Working with GROUPS should CREATE new GROUP" file="./test_spec.rb" time="43.465063"/>
-</testsuite>

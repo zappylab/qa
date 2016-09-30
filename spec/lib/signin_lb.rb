@@ -3,14 +3,14 @@ require 'capybara/dsl'
 module LoginPageModule
   class LoginPageClass
     include Capybara::DSL
-    link = 'http://je-protocols'
+    $link =  'http://sience:awesome@dev.protocols.io/'#'http://je-protocols'
     # @param email [String] email for account to login in app
     # @param pass [String] password for account to login in app
     # @note Each test scenario starts with login in app
     # @example
     #   sign_in('protocolsuitest@gmail.com', 'protocols-ui-123')
     def sign_in(email, pass)
-      visit(link)
+      visit($link)
       click_link('sign-in-header')
       find(:xpath, './/input[@id="email"]').set(email)
       find(:xpath, './/input[@id="pass"]').set(pass)
@@ -25,7 +25,7 @@ module LoginPageModule
     # @example
     #   sign_up('protocolsuitest@gmail.com', 'protocols-ui-123')
     def sign_up(email, pass)
-      visit(link)
+      visit($link)
       click_link('sign-up-header')
       find(:xpath, './/input[@id="email"]').set(email)
       find(:xpath, './/input[@id="pass"]').set("protocols-ui-123")
