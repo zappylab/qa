@@ -19,17 +19,20 @@ require 'capybara/rspec'
 require 'capybara-screenshot/rspec'
 require 'capybara'
 require 'capybara/dsl'
-
+require 'selenium/webdriver'
 require 'json'
+require 'os'
 require 'rubygems'
 
             #connected modules#
-require './lib/signin_lb.rb'
-require './lib/signup_lb.rb'
-require './lib/user_profile_lib.rb'
-require './lib/protocols_groups_lib.rb'
-require './lib/protocols_ingroups_lib.rb'
-require './lib/protocols_start_page_lib.rb'
+require_relative './lib/signin_lb.rb'
+require_relative './lib/signup_lb.rb'
+require_relative './lib/user_profile_lib.rb'
+require_relative './lib/protocols_groups_lib.rb'
+require_relative './lib/protocols_ingroups_lib.rb'
+require_relative './lib/protocols_start_page_lib.rb'
+require_relative './lib/base_lib.rb'
+require_relative './lib/protocols_editor_page.rb'
             #connected modules#
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
@@ -37,15 +40,25 @@ require './lib/protocols_start_page_lib.rb'
 file = File.read('browsers.json')
 data_hash = JSON.parse(file)
 
+puts 'OS is :'
+puts OS.windows?
+
 Capybara::Screenshot.autosave_on_failure = true
 
 Capybara.configure do |config|
   env = data_hash['TestProfile'][0]['browser']
   if env == 'firefox'
+    if !(OS.windows?)
+      Selenium::WebDriver::Firefox::Binary.path = "/usr/bin/firefox"
+    end
     Capybara.register_driver :selenium do |app|
       Capybara::Selenium::Driver.new(app, :browser => :firefox)
     end
   elsif env == 'chrome'
+    if !(OS.windows?)
+      Selenium::WebDriver::Chrome.path = "/usr/bin/google-chrome"
+      Selenium::WebDriver::Chrome.driver_path = "/home/qa/bin/chromedriver"
+    end
     Capybara.register_driver :selenium do |app|
       Capybara::Selenium::Driver.new(app, :browser => :chrome)
     end
@@ -63,21 +76,38 @@ RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
 
             #connected modules#
-  config.include SignUpModule::Test#, type: :feature
-  config.include SignInModule::Test#s, type: :feature
-  config.include UserProfileModule::Test
-  config.include ProtocolsStartPageModule::Test
-  config.include ProtocolsGroupModule::Test
-  config.include ProtocolsInGroupModule::Test
+  config.include GoogleEmailModule
+  config.include LoginPageModule
+  config.include UserProfilePageModule
+  config.include ProtocolsStartPageModule
+  config.include ProtocolsGroupPageModule
+  config.include ProtocolsInGroupPageModule
+  config.include BaseLibModule
+  config.include EditProtocolsPageModule
+
+# config.include SignInClass
+# config.include ProtocolsStartPageClass
+
             #connected modules#
 
   config.include Capybara::DSL
   config.before(:each) do
      Capybara.page.driver.browser.manage.window.maximize
+     Capybara.reset_sessions!
   end
   config.after(:each) do
     Capybara.reset_sessions!
+
   end
+
+  # config.after(:all) do
+  #   @headless.destroy
+  # end
+
+  # config.before(:all) do
+  #    @headless = Headless.new
+  #    @headless.start
+  # end
 
     # This option will default to `true` in RSpec 4. It makes the `description`
     # and `failure_message` of custom matchers include text for helper methods

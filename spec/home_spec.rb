@@ -1,6 +1,4 @@
-require './spec_helper.rb'
-require 'capybara/rspec'
-
+# require './spec_helper.rb'
 
 feature "Sign up, verify acc, sign in and delete acc" do
 	scenario "delete protocols account" do

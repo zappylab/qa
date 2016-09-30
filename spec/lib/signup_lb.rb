@@ -1,26 +1,12 @@
 require 'capybara/dsl'
 
-module SignUpModule
-  module Test
+module GoogleEmailModule
+  class GoogleEmailClass
     include Capybara::DSL
-
-    # @param email [String] account's email using to sign up the app
-    # @param pass [String] account's password using to sign up the app
-    # @note Uses to sign up into the app and start a new protocols account
-    # @example
-    #   sign_up('protocolsuitest@gmail.com', 'protocols-ui-123')
-    def sign_up(email, pass)
-      visit('http://je-protocols')
-      click_link('sign-up-header')
-      find(:xpath, './/input[@id="email"]').set(email)
-      find(:xpath, './/input[@id="pass"]').set("protocols-ui-123")
-      find(:xpath, './/button[@class="btn btn-create"]').click
-      page.has_selector?(:xpath, './/div[@class="ul-page"]')
-    end
-
+    link = 'http://je-protocols'
     # @note This method is used to confirm new account 
     # @example
-    #   sign_up('protocolsuitest@gmail.com', 'protocols-ui-123')    
+    #   verify_email('protocolsuitest@gmail.com', 'protocols-ui-123', verifying)    
     def verify_email(user, pass, scenario)
       email_name = 'protocols'
       visit('https://mail.google.com/')       #navigate to gmail
@@ -107,7 +93,7 @@ module SignUpModule
       Capybara.reset_sessions!
       # page.execute_script("sessionStorage.clear();")
       # page.execute_script("localStorage.clear();")
-      visit('http://je-protocols') 
+      visit(link) 
     end
   end
 end

@@ -1,9 +1,12 @@
 require 'capybara/dsl'
+require_relative './base_lib.rb'
 require 'time'
 
-module ProtocolsGroupModule
-	module Test
+module ProtocolsGroupPageModule 
+	# module Test
+	class ProtocolsGroupPageClass
 		include Capybara::DSL
+		include BaseLibModule
 		# @note This method brings user to EXPLORE page
 		# @example
 		#   create_group
@@ -117,6 +120,7 @@ module ProtocolsGroupModule
 		def drill_down_group
 			find(:xpath, ".//ul[@class='community-search-groups']/li").click
 			page.has_selector?(:xpath, ".//div[@class='community-logo']")
+			return ProtocolsInGroupPageModule::ProtocolsInGroupPageClass.new
 		end
 	end
 end

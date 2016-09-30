@@ -1,7 +1,7 @@
 require 'capybara/dsl'
 
-module ProtocolsInGroupModule
-	module Test
+module ProtocolsInGroupPageModule
+	module ProtocolsInGroupPageClass
 		include Capybara::DSL
 		# @note This method brings user to EXPLORE page
 		# @example

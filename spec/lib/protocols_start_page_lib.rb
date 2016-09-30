@@ -1,8 +1,10 @@
 require 'capybara/dsl'
+require_relative './base_lib.rb'
 
 module ProtocolsStartPageModule
-	module Test
+	class ProtocolsStartPageClass
 		include Capybara::DSL
+		include BaseLibModule
 		# @note This method brings user to EXPLORE page
 		# @example
 		#   go_to_explore
@@ -15,6 +17,7 @@ module ProtocolsStartPageModule
 		#   go_to_protocols
 		def go_to_protocols
 			find(:xpath, ".//div[@class='help-btns']/ul/li/i[@class='p-font pf-logo']").click
+			return ProtocolsGroupPageModule::ProtocolsGroupPageClass.new
     	end
 
 		# @note This method brings user to GROPUS page
@@ -23,6 +26,7 @@ module ProtocolsStartPageModule
 		def go_to_groups
 			# find(:xpath, ".//div[@class='help-btns']/ul/li/i[@class='p-font pf-public']").click #this useful if to events present on start page
 			find("#groups-link-id").click
+			return ProtocolsGroupPageModule::ProtocolsGroupPageClass.new
     	end
 
 		# @note This method brings user to RESEARCHERS page
