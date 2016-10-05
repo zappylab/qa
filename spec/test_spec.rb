@@ -4,6 +4,7 @@ require_relative './spec_helper.rb'
 
 describe 'SIGN UP protocols app, VERIFY acc , SIGN in app, DELETE acc' do
 	it 'should DELETE activated acc' do
+		$loginPage = LoginPageModule::LoginPageClass.new
 		$protocolsStartPage = $loginPage.sign_in "protocolsuitest@gmail.com", "protocols-ui-123"
 		userProfilePage = $protocolsStartPage.go_to_user_profile
 		userProfilePage.delete_user
