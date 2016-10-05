@@ -3,6 +3,12 @@ require_relative './spec_helper.rb'
 # include BaseLibModule
 
 describe 'SIGN UP protocols app, VERIFY acc , SIGN in app, DELETE acc' do
+	it 'should DELETE activated acc' do
+		$protocolsStartPage = $loginPage.sign_in "protocolsuitest@gmail.com", "protocols-ui-123"
+		userProfilePage = $protocolsStartPage.go_to_user_profile
+		userProfilePage.delete_user
+	end
+
 	it 'should SIGN UP into app' do
 		$loginPage = LoginPageModule::LoginPageClass.new
 		$loginPage.sign_up "protocolsuitest@gmail.com", "protocols-ui-123"
@@ -14,21 +20,15 @@ describe 'SIGN UP protocols app, VERIFY acc , SIGN in app, DELETE acc' do
 	end
 
 	it 'should SIGN IN the protocols app' do
-		startPage = $loginPage.sign_in "protocolsuitest1@gmail.com", "protocols-ui-123"
+		startPage = $loginPage.sign_in "protocolsuitest@gmail.com", "protocols-ui-123"
 		startPage.sign_out
-	end
-
-	it 'should DELETE activated acc' do
-		$protocolsStartPage = $loginPage.sign_in "protocolsuitest@gmail.com", "protocols-ui-123"
-		userProfilePage = $protocolsStartPage.go_to_user_profile
-		userProfilePage.delete_user
 	end
 end
 
 describe 'Working with GROUPS' do
 	group_name = ''
 	it 'should CREATE new GROUP' do
-		$protocolsStartPage =$loginPage.sign_in "vasily@zappylab.com", "NLg6v5JT"
+		$protocolsStartPage =$loginPage.sign_in "protocolsuitest@gmail.com", "protocols-ui-123"
 		protocolsGroupPage = $protocolsStartPage.go_to_groups
 		protocolsGroupPage.create_group
 		group_name = protocolsGroupPage.fill_group_name "testGroupName"
@@ -43,21 +43,21 @@ describe 'Working with GROUPS' do
 	end
 
 	it 'should DELETE created GROUP' do
-		$loginPage.sign_in "vasily@zappylab.com", "NLg6v5JT"
+		$loginPage.sign_in "protocolsuitest@gmail.com", "protocols-ui-123"
 		protocolsGroupPage = $protocolsStartPage.go_to_groups
 		protocolsGroupPage.find_group group_name
 		inGroup = protocolsGroupPage.drill_down_group
 		inGroup.delete_group
 	end
 
-	it ":PRECONDITIONS: should DELETE protocols account" do
-		$loginPage.sign_in "protocolsuitest2@gmail.com", "protocols-ui-123"
-		userPage = $protocolsStartPage.go_to_user_profile
-		userPage.delete_user
+	it '---PRECONDITIONS: delete protocolsuitest2 acc--- should DELETE activated acc' do
+		$protocolsStartPage = $loginPage.sign_in "protocolsuitest2@gmail.com", "protocols-ui-123"
+		userProfilePage = $protocolsStartPage.go_to_user_profile
+		userProfilePage.delete_user
 	end
 
 	it "should CREATE GROUP with invitation" do
-		$loginPage.sign_in "vasily@zappylab.com", "NLg6v5JT"
+		$loginPage.sign_in "protocolsuitest@gmail.com", "protocols-ui-123"
 		groupsPage = $protocolsStartPage.go_to_groups
 		groupsPage.create_group
 		group_name = groupsPage.fill_group_name "testGroupName"

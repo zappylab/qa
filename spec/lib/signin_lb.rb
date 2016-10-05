@@ -3,7 +3,7 @@ require 'capybara/dsl'
 module LoginPageModule
   class LoginPageClass
     include Capybara::DSL
-    $link =  'http://sience:awesome@dev.protocols.io/'#'http://je-protocols'
+    $link =  'http://je-protocols' #'http://sience:awesome@dev.protocols.io/'
     # @param email [String] email for account to login in app
     # @param pass [String] password for account to login in app
     # @note Each test scenario starts with login in app
