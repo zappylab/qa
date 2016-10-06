@@ -4,9 +4,9 @@ module LoginPageModule
   class LoginPageClass
     include Capybara::DSL
     # $link =  'http://je-protocols' #'http://sience:awesome@dev.protocols.io/'
-    def get_link
+    # def get_link
       $link = ENV['link']
-    end
+    # end
     # @param email [String] email for account to login in app
     # @param pass [String] password for account to login in app
     # @note Each test scenario starts with login in app

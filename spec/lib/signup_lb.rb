@@ -6,9 +6,9 @@ module GoogleEmailModule
     include Capybara::DSL
     include LoginPageModule
 
-    $lnk = (LoginPageModule::LoginPageClass.new).get_link
+    $link = ENV['link']
 
-    puts "This is link in sign up ---> " + $lnk
+    puts "This is link in sign up ---> " + $link
     # @note This method is used to confirm new account 
     # @example
     #   verify_email('protocolsuitest@gmail.com', 'protocols-ui-123', verifying)    
@@ -88,7 +88,7 @@ module GoogleEmailModule
       end
       switch_to_window(email_window)
       Capybara.reset_sessions!
-      visit($lnk) 
+      visit($link) 
     end
   end
 end
