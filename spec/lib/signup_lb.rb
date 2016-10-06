@@ -1,9 +1,14 @@
 require 'capybara/dsl'
+require_relative('./signin_lb.rb')
 
 module GoogleEmailModule
   class GoogleEmailClass
     include Capybara::DSL
-    $link =  'http://je-protocols' #'http://sience:awesome@dev.protocols.io/'
+    include LoginPageModule
+
+    $lnk = (LoginPageModule::LoginPageClass.new).get_link
+
+    puts "This is link in sign up ---> " + $lnk
     # @note This method is used to confirm new account 
     # @example
     #   verify_email('protocolsuitest@gmail.com', 'protocols-ui-123', verifying)    
@@ -29,25 +34,19 @@ module GoogleEmailModule
       case scenario
       when "verifying"
         page.has_selector?(:xpath, ".//span[contains(text(), 'Your account is ready')]") 
-        puts scenario + 'test1'
        when "invitation-signed"
         page.has_selector?(:xpath, ".//span[contains(text(), 'Invitation to join')]") #.//span[contains(text(), 'invited you to join')]
-        puts scenario + 'test1'
       when "invitation-not-signed"
         page.has_selector?(:xpath, ".//span[contains(text(), 'Invitation to join')]")
-        puts scenario + 'test1'
       end 
-      title_array = page.all(:xpath, xpathString)
-      puts title_array.size
+      # title_array = page.all(:xpath, xpathString)
       find_all(:xpath, xpathString)[0].click  #go inside mail
 
       case scenario
         when "verifying"
           page.has_selector?(:xpath, './/a[contains(@href, "protocols") and contains(text(), "Verify")]')
-          puts scenario + 'test2'
         when "invitation-signed", "invitation-not-signed"
           page.has_selector?(:xpath, './/a[contains(@href, "protocols") and contains(text(), "Confirm")]')
-          puts scenario + 'test2'
       end
 
       email_window = current_window
@@ -55,10 +54,8 @@ module GoogleEmailModule
         case scenario
         when "verifying"
           find(:xpath, './/a[contains(@href, "protocols") and contains(text(), "Verify")]').click
-          puts scenario + 'test3'
         when "invitation-signed", "invitation-not-signed"
           find(:xpath, './/a[contains(@href, "protocols") and contains(text(), "Confirm")]').click
-          puts scenario + 'test3'
         end
       end
 
@@ -91,9 +88,7 @@ module GoogleEmailModule
       end
       switch_to_window(email_window)
       Capybara.reset_sessions!
-      # page.execute_script("sessionStorage.clear();")
-      # page.execute_script("localStorage.clear();")
-      visit($link) 
+      visit($lnk) 
     end
   end
 end

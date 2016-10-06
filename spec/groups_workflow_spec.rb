@@ -6,7 +6,7 @@ describe 'Working with GROUPS' do
 	group_name = ''
 	it 'should CREATE new GROUP' do
 		$loginPage = LoginPageModule::LoginPageClass.new
-		$protocolsStartPage =$loginPage.sign_in "protocolsuitest@gmail.com", "protocols-ui-123"
+		$protocolsStartPage =$loginPage.sign_in "protocolsuitest1@gmail.com", "protocols-ui-123"
 		protocolsGroupPage = $protocolsStartPage.go_to_groups
 		protocolsGroupPage.create_group
 		group_name = protocolsGroupPage.fill_group_name "testGroupName"
@@ -21,21 +21,21 @@ describe 'Working with GROUPS' do
 	end
 
 	it 'should DELETE created GROUP' do
-		$loginPage.sign_in "protocolsuitest@gmail.com", "protocols-ui-123"
+		$loginPage.sign_in "protocolsuitest1@gmail.com", "protocols-ui-123"
 		protocolsGroupPage = $protocolsStartPage.go_to_groups
 		protocolsGroupPage.find_group group_name
 		inGroup = protocolsGroupPage.drill_down_group
 		inGroup.delete_group
 	end
 
-	it '---PRECONDITIONS: delete protocolsuitest2 acc--- should DELETE activated acc' do
-		$protocolsStartPage = $loginPage.sign_in "protocolsuitest2@gmail.com", "protocols-ui-123"
+	it '---PRECONDITIONS: delete protocolsuitest3 acc--- should DELETE activated acc' do
+		$protocolsStartPage = $loginPage.sign_in "protocolsuitest3@gmail.com", "protocols-ui-123"
 		userProfilePage = $protocolsStartPage.go_to_user_profile
 		userProfilePage.delete_user
 	end
 
 	it "should CREATE GROUP with invitation" do
-		$loginPage.sign_in "protocolsuitest@gmail.com", "protocols-ui-123"
+		$loginPage.sign_in "protocolsuitest1@gmail.com", "protocols-ui-123"
 		groupsPage = $protocolsStartPage.go_to_groups
 		groupsPage.create_group
 		group_name = groupsPage.fill_group_name "testGroupName"
@@ -45,19 +45,19 @@ describe 'Working with GROUPS' do
 		groupsPage.fill_location "testLocation"
 		groupsPage.set_group_access "invitation"
 		groupsPage.set_group_visibility true
-		groupsPage.invite_people "protocolsuitest1@gmail.com, protocolsuitest2@gmail.com"
+		groupsPage.invite_people "protocolsuitest2@gmail.com, protocolsuitest3@gmail.com"
 		groupsPage.save_group
 		groupsPage.sign_out
 	end
 
 	it "should CONFIRM invites EMAILS for first user ---SIGNED UP---" do
 		$gmail = GoogleEmailModule::GoogleEmailClass.new
-		$gmail.verify_email "protocolsuitest1@gmail.com", "protocols-ui-123", "invitation-signed"
+		$gmail.verify_email "protocolsuitest2@gmail.com", "protocols-ui-123", "invitation-signed"
 	end
 
 	it "should CONFIRM invites EMAILS for second user ---NOT SIGNED UP---" do
-		$gmail.verify_email "protocolsuitest2@gmail.com", "protocols-ui-123", "invitation-not-signed"
-		$gmail.verify_email "protocolsuitest2@gmail.com", "protocols-ui-123", "verifying"
+		$gmail.verify_email "protocolsuitest3@gmail.com", "protocols-ui-123", "invitation-not-signed"
+		$gmail.verify_email "protocolsuitest3@gmail.com", "protocols-ui-123", "verifying"
 	end
 end
 

@@ -37,12 +37,13 @@ require_relative './lib/protocols_editor_page.rb'
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
-puts 'OS is WINDOWS? ---> :' + OS.windows?.to_s
+puts "\n    OS is WINDOWS? ---> :" + OS.windows?.to_s + "\n"
 
 Capybara::Screenshot.autosave_on_failure = false
 
+
 Capybara.configure do |config|
-  if ENV['BROWSER'] == 'firefox'
+  if ENV['browser'] == 'firefox'
     puts "    Running FIREFOX browser...\n"
     if !(OS.windows?)
       Selenium::WebDriver::Firefox::Binary.path = "/usr/bin/firefox"
@@ -50,14 +51,14 @@ Capybara.configure do |config|
     Capybara.register_driver :selenium do |app|
       Capybara::Selenium::Driver.new(app, :browser => :firefox)
     end
-  elsif ENV['BROWSER'] == 'chrome'
-          puts "Running CHROME browser...\n"
+  elsif ENV['browser'] == 'chrome'
+          puts "\n    Running CHROME browser...\n"
     if(OS.windows?)
       Selenium::WebDriver::Chrome.driver_path = "../ChromeDriver/chromedriver.exe"
-      puts "    using ChromeDriver for WINDOWS...\n"
+      puts "\n    Using ChromeDriver for WINDOWS...\n"
     else
       Selenium::WebDriver::Chrome.driver_path = "../ChromeDriver/chromedriver"
-      puts "    using ChromeDriver for LINUX...\n"
+      puts "\n    Using ChromeDriver for LINUX...\n"
     end
     if !(OS.windows?)
       Selenium::WebDriver::Chrome.path = "/usr/bin/google-chrome"
@@ -79,8 +80,8 @@ RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
 
             #connected modules#
-  config.include GoogleEmailModule
   config.include LoginPageModule
+  config.include GoogleEmailModule
   config.include UserProfilePageModule
   config.include ProtocolsStartPageModule
   config.include ProtocolsGroupPageModule
