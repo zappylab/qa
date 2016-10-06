@@ -57,7 +57,7 @@ Capybara.configure do |config|
       Selenium::WebDriver::Chrome.driver_path = "../ChromeDriver/chromedriver.exe"
       puts "\n    Using ChromeDriver for WINDOWS...\n"
     else
-      Selenium::WebDriver::Chrome.driver_path = "../ChromeDriver/chromedriver"
+      Selenium::WebDriver::Chrome.driver_path = "../../chromedriver"
       puts "\n    Using ChromeDriver for LINUX...\n"
     end
     if !(OS.windows?)
