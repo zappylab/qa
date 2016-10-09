@@ -23,6 +23,9 @@ require 'selenium/webdriver'
 require 'json'
 require 'os'
 require 'rubygems'
+require "net/http"
+require "uri"
+require "json"
 
             #connected modules#
 require_relative './lib/signin_lb.rb'
@@ -37,10 +40,16 @@ require_relative './lib/protocols_editor_page.rb'
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
+parms = {
+    text: "text_for_slack", 
+    channel: "@vasily", 
+    username: "incoming-webhook", 
+    icon_emoji: ":raised_hands:"
+}
+
 puts "\n    OS is WINDOWS? ---> :" + OS.windows?.to_s + "\n"
 
 Capybara::Screenshot.autosave_on_failure = false
-
 
 Capybara.configure do |config|
   if ENV['browser'] == 'firefox'
@@ -97,20 +106,19 @@ RSpec.configure do |config|
   config.include Capybara::DSL
   config.before(:each) do
      Capybara.page.driver.browser.manage.window.maximize
-     Capybara.reset_sessions!
+     Capybara.reset_sessions! 
   end
+
   config.after(:each) do
     Capybara.reset_sessions!
-
   end
 
   # config.after(:all) do
-  #   @headless.destroy
+
   # end
 
   # config.before(:all) do
-  #    @headless = Headless.new
-  #    @headless.start
+
   # end
 
     # This option will default to `true` in RSpec 4. It makes the `description`
