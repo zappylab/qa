@@ -17,5 +17,4 @@ describe 'Working with protocols' do
 		protocolsEditPage.save_protocol
 		protocolsEditPage.sign_out
 	end
-	
 end

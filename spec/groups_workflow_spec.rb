@@ -5,7 +5,7 @@ require_relative './spec_helper.rb'
 describe 'Working with GROUPS' do
 	$group_name = ''
 	it 'should CREATE new GROUP' do
-		$loginPage = LoginPageModule::LoginPageClass.new
+		$loginPage = LoginPageClass.new
 		$protocolsStartPage =$loginPage.sign_in "protocolsuitest1@gmail.com", "protocols-ui-123"
 		protocolsGroupPage = $protocolsStartPage.go_to_groups
 		protocolsGroupPage.create_group
@@ -35,7 +35,7 @@ describe 'Working with GROUPS' do
 	end
 
 	it "should CREATE GROUP with invitation" do
-		$loginPage = LoginPageModule::LoginPageClass.new
+		$loginPage = LoginPageClass.new
 	 	$protocolsStartPage = $loginPage.sign_in "protocolsuitest1@gmail.com", "protocols-ui-123"
 		groupsPage = $protocolsStartPage.go_to_groups
 		groupsPage.create_group
@@ -52,7 +52,7 @@ describe 'Working with GROUPS' do
 	end
 
 	it "should CONFIRM invites EMAILS for first user ---SIGNED UP---" do
-		$gmail = GoogleEmailModule::GoogleEmailClass.new
+		$gmail = GoogleEmailClass.new
 		$gmail.verify_email "protocolsuitest2@gmail.com", "protocols-ui-123", "invitation-signed"
 	end
 

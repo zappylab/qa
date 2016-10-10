@@ -16,25 +16,25 @@ module BaseLibModule
         puts '  find selector   ' + (Time.now).strftime("%H:%M:%S")
 		page.has_selector?("#app")
         puts '  selector found   ' + (Time.now).strftime("%H:%M:%S")
-		return LoginPageModule::LoginPageClass.new
+		return LoginPageClass.new
     end
 
     def go_to_user_profile
 		find(:xpath, ".//*[@class='avatar']").click
 		find(:xpath, ".//*[@class='dh-right']").click
 		page.has_selector?("#app")
-		return UserProfilePageModule::UserProfilePageClass.new
+		return UserProfilePageClass.new
     end
 
     def go_to_your_protocols
     	find(:xpath, ".//*[@class='avatar']").click
     	find(:xpath, ".//*[@class='dropdown-right']/a[contains(text(), 'protocol')]").click
-    	return ProtocolsPageModule::ProtocolsPageClass.new
+    	return ProtocolsPageClass.new
     end
 
     def go_to_your_protocols
         find(:xpath, ".//li/a[text()='Your protocols']").click
         page.has_selector?(:xpath, ".//div[@class='files-manager']")
-        return ProtocolsIoPageModule::ProtocolsIoPageClass.new
+        return ProtocolsIoPageClass.new
     end
 end

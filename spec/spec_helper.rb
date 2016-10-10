@@ -41,13 +41,6 @@ require_relative './lib/protocols_page_lib.rb'
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
-parms = {
-    text: "text_for_slack", 
-    channel: "@vasily", 
-    username: "incoming-webhook", 
-    icon_emoji: ":raised_hands:"
-}
-
 puts "\n    OS is WINDOWS? ---> :" + OS.windows?.to_s + "\n"
 
 Capybara::Screenshot.autosave_on_failure = false
@@ -90,12 +83,12 @@ RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
 
             #connected modules#
-  config.include LoginPageModule
-  config.include GoogleEmailModule
-  config.include UserProfilePageModule
-  config.include ProtocolsStartPageModule
-  config.include ProtocolsGroupPageModule
-  config.include ProtocolsInGroupPageModule
+  # config.include LoginPageModule
+  # config.include GoogleEmailModule
+  # config.include UserProfilePageModule
+  # config.include ProtocolsStartPageModule
+  # config.include ProtocolsGroupPageModule
+  # config.include ProtocolsInGroupPageModule
   config.include BaseLibModule
   # config.include EditProtocolsPageModule
   # config.include ProtocolsIoPageModule
