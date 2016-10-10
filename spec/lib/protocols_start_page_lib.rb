@@ -26,6 +26,7 @@ module ProtocolsStartPageModule
 		def go_to_groups
 			# find(:xpath, ".//div[@class='help-btns']/ul/li/i[@class='p-font pf-public']").click #this useful if to events present on start page
 			find("#groups-link-id").click
+			page.has_selector?(:xpath , ".//ul[@class='community-search-groups']")
 			return ProtocolsGroupPageModule::ProtocolsGroupPageClass.new
     	end
 

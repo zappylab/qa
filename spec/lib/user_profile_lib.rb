@@ -14,7 +14,7 @@ module UserProfilePageModule
 			find_all(:xpath, ".//div[@class='action-btns']")[0].click
 			find_all(:xpath, ".//a[@class='deleteaccount']", visible: false)[0].click
 			find("#profile-delete-btn").click
-			page.has_selector?("#app")
+			page.has_selector?("#sign-in-header")
     	end
 	end
 end

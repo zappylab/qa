@@ -3,19 +3,19 @@ require_relative './spec_helper.rb'
 # include BaseLibModule
 
 describe 'Working with GROUPS' do
-	group_name = ''
+	$group_name = ''
 	it 'should CREATE new GROUP' do
 		$loginPage = LoginPageModule::LoginPageClass.new
 		$protocolsStartPage =$loginPage.sign_in "protocolsuitest1@gmail.com", "protocols-ui-123"
 		protocolsGroupPage = $protocolsStartPage.go_to_groups
 		protocolsGroupPage.create_group
-		group_name = protocolsGroupPage.fill_group_name "testGroupName"
-		protocolsGroupPage.fill_about_text "testAbout"
 		protocolsGroupPage.fill_interest "interest"
+		protocolsGroupPage.fill_about_text "testAbout"
 		protocolsGroupPage.fill_website "http://testsite.com"
 		protocolsGroupPage.fill_location "testLocation"
 		protocolsGroupPage.set_group_access "invitation"
 		protocolsGroupPage.set_group_visibility true
+		$group_name = protocolsGroupPage.fill_group_name "tgn"
 		protocolsGroupPage.save_group
 		protocolsGroupPage.sign_out
 	end
@@ -23,7 +23,7 @@ describe 'Working with GROUPS' do
 	it 'should DELETE created GROUP' do
 		$loginPage.sign_in "protocolsuitest1@gmail.com", "protocols-ui-123"
 		protocolsGroupPage = $protocolsStartPage.go_to_groups
-		protocolsGroupPage.find_group group_name
+		protocolsGroupPage.find_group $group_name
 		inGroup = protocolsGroupPage.drill_down_group
 		inGroup.delete_group
 	end
@@ -35,10 +35,10 @@ describe 'Working with GROUPS' do
 	end
 
 	it "should CREATE GROUP with invitation" do
-		$loginPage.sign_in "protocolsuitest1@gmail.com", "protocols-ui-123"
+		$loginPage = LoginPageModule::LoginPageClass.new
+	 	$protocolsStartPage = $loginPage.sign_in "protocolsuitest1@gmail.com", "protocols-ui-123"
 		groupsPage = $protocolsStartPage.go_to_groups
 		groupsPage.create_group
-		group_name = groupsPage.fill_group_name "testGroupName"
 		groupsPage.fill_about_text "testAbout"
 		groupsPage.fill_interest "interest"
 		groupsPage.fill_website "http://testsite.com"
@@ -46,6 +46,7 @@ describe 'Working with GROUPS' do
 		groupsPage.set_group_access "invitation"
 		groupsPage.set_group_visibility true
 		groupsPage.invite_people "protocolsuitest2@gmail.com, protocolsuitest3@gmail.com"
+		$group_name = groupsPage.fill_group_name "tgn"
 		groupsPage.save_group
 		groupsPage.sign_out
 	end

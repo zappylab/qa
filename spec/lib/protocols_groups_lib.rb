@@ -12,6 +12,7 @@ module ProtocolsGroupPageModule
 		#   create_group
 		def create_group
 			find(:xpath, ".//span[@class='add-content-icon cc-block-inline']/i[@class='p-font pf-plus']").click
+			page.has_selector?("#save-group-btn")
     	end
 
     	# @param name [String] NAME of created group
@@ -19,9 +20,12 @@ module ProtocolsGroupPageModule
 		# @example
 		#   fill_group_name("testGroupName")
     	def fill_group_name(name)
-    		name = name+Time.now.nsec.to_s
-    		find(:xpath, ".//div[@class='create-name']/input").set(name)
-    		return name
+    		$name = name+Time.now.nsec.to_s
+    		element = find(:xpath, ".//div[@class='create-name']/input").set($name)
+    		queryString = ".//div[@class='create-name']/span[contains(text(), '" + $name.downcase + "')]"
+    		find(:xpath, ".//div[@class='create-name']/label").click
+    		page.has_selector?(:xpath, queryString)
+    		return $name
     	end
 
     	# @param text [String] textn in ABOUT field of created group
@@ -30,6 +34,7 @@ module ProtocolsGroupPageModule
 		#   fill_about_text("testText")
     	def fill_about_text(text)
     		within_frame 'add-group-mce_ifr' do
+    			find(:xpath, ".//body[@id='tinymce']").click
     			find(:xpath, ".//body[@id='tinymce']").set(text)
     		end
     	end
@@ -107,13 +112,17 @@ module ProtocolsGroupPageModule
 		# @example
 		#   save_group
 		def save_group
-			click_button("save-group-btn")
-			page.has_selector?(:xpath, ".//div[@class='community-logo']")
+			find("#save-group-btn").click
+			page.has_selector?(:xpath, ".//div[@class='community-overview']//*/span[contains(text(),'" + $name + "')]")
 		end
 
 		def find_group(group_name)
-			find("#header-search-input").set(group_name)
-			find("#header-search-input").native.send_keys(:enter)
+			# find("#header-search-input").set(group_name) this is for je-protocols
+			# find("#header-search-input").native.send_keys(:enter)
+			puts 'Searching group ' + group_name 
+			seach_link = ENV['link'] + "/search?key=" + group_name
+			visit(seach_link)
+
 			page.has_selector?(:xpath, ".//ul[@class='community-search-groups']")# if noSuchElementLocated -> searchResult=null
 		end
 

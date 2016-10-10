@@ -31,4 +31,10 @@ module BaseLibModule
     	find(:xpath, ".//*[@class='dropdown-right']/a[contains(text(), 'protocol')]").click
     	return ProtocolsPageModule::ProtocolsPageClass.new
     end
+
+    def go_to_your_protocols
+        find(:xpath, ".//li/a[text()='Your protocols']").click
+        page.has_selector?(:xpath, ".//div[@class='files-manager']")
+        return ProtocolsIoPageModule::ProtocolsIoPageClass.new
+    end
 end

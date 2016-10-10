@@ -36,6 +36,7 @@ require_relative './lib/protocols_ingroups_lib.rb'
 require_relative './lib/protocols_start_page_lib.rb'
 require_relative './lib/base_lib.rb'
 require_relative './lib/protocols_editor_page.rb'
+require_relative './lib/protocols_page_lib.rb'
             #connected modules#
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
@@ -76,7 +77,7 @@ Capybara.configure do |config|
       Capybara::Selenium::Driver.new(app, :browser => :chrome)
     end
   end
-  Capybara.default_max_wait_time = 15
+  Capybara.default_max_wait_time = 25
   config.run_server = false
   config.default_driver = :selenium
   config.app_host = 'https://www.google.com' # change url
@@ -96,7 +97,9 @@ RSpec.configure do |config|
   config.include ProtocolsGroupPageModule
   config.include ProtocolsInGroupPageModule
   config.include BaseLibModule
-  config.include EditProtocolsPageModule
+  # config.include EditProtocolsPageModule
+  # config.include ProtocolsIoPageModule
+  # config.include EditProtocolsPageClass
 
 # config.include SignInClass
 # config.include ProtocolsStartPageClass

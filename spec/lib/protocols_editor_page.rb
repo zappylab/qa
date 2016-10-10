@@ -1,9 +1,30 @@
 require 'capybara/dsl'
-require_relative './base_lib.rb'
+# require_relative './base_lib.rb'
 
-module EditProtocolsPageModule
+# module EditProtocolsPageModule
 	class EditProtocolsPageClass
 		include BaseLibModule
+
+		def initialize(win)
+			@window = win
+			switch_to_window(@window)
+			page.has_selector?(:xpath, ".//div[@class='editor-header-right']/input")
+			puts 'Switched to new window and has selector'
+		end
+
+		def self.finalize()
+			first_win = page.driver.browser.window_handles.first
+			@window.close
+			switch_to_window(first_win)
+			puts 'EditProtocolsPageClass destroyed'
+		end
+
+		def finalize()
+			first_win = page.driver.browser.window_handles.first
+			@window.close
+			switch_to_window(first_win)
+			puts 'not self EditProtocolsPageClass destroyed'
+		end
 
 		def set_protocol_name(name)
 			find(:xpath, ".//div[@class='editor-header-right']/input").set('')
@@ -80,4 +101,4 @@ module EditProtocolsPageModule
 		end
 
 	end
-end
+# end
