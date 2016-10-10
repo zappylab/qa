@@ -12,20 +12,6 @@ require 'capybara/dsl'
 			puts 'Switched to new window and has selector'
 		end
 
-		def self.finalize()
-			first_win = page.driver.browser.window_handles.first
-			@window.close
-			switch_to_window(first_win)
-			puts 'EditProtocolsPageClass destroyed'
-		end
-
-		def finalize()
-			first_win = page.driver.browser.window_handles.first
-			@window.close
-			switch_to_window(first_win)
-			puts 'not self EditProtocolsPageClass destroyed'
-		end
-
 		def set_protocol_name(name)
 			find(:xpath, ".//div[@class='editor-header-right']/input").set('')
 			find(:xpath, ".//div[@class='editor-header-right']/input").set(name)

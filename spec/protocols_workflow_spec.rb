@@ -14,9 +14,8 @@ describe 'Working with protocols' do
 		protocolsIoPage.select_file_by_number 1
 		protocolsEditPage = protocolsIoPage.open_editor
 		protocolsEditPage.set_protocol_name 'testName'
-		protocolsEditPage=nil
-		GC.start
-		ObjectSpace.garbage_collect
-		protocolsIoPage.sign_out
+		protocolsEditPage.save_protocol
+		protocolsEditPage.sign_out
 	end
+	
 end
