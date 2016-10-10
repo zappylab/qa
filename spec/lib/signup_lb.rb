@@ -15,6 +15,9 @@ module GoogleEmailModule
     def verify_email(user, pass, scenario)
       email_name = 'protocols'
       visit('https://mail.google.com/')       #navigate to gmail
+      sleep 2.0
+      Capybara::Screenshot.screenshot_and_save_page
+      sleep 2.0
       if page.has_selector?("#Email")
       elsif page.has_selector?("#account-chooser-link")
         find("#account-chooser-link").click
