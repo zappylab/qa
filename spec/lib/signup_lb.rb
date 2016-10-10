@@ -25,8 +25,7 @@ module GoogleEmailModule
       rescue Capybara::ElementNotFound
       end
 
-      if page.has_selector?("#Email")
-      elsif page.has_selector?("#account-chooser-link")
+      if page.has_selector?("#account-chooser-link")
         find("#account-chooser-link").click
         find("#account-chooser-add-account").click
       elsif page.has_selector?("#account-chooser-add-account")
