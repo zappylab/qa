@@ -14,7 +14,8 @@ module GoogleEmailModule
     #   verify_email('protocolsuitest@gmail.com', 'protocols-ui-123', verifying)    
     def verify_email(user, pass, scenario)
       email_name = 'protocols'
-      visit('https://mail.google.com/')       #navigate to gmail
+      # visit('https://mail.google.com/')       #navigate to gmail
+      visit('https://www.google.com/gmail/')       #navigate to gmail
       sleep 2.0
       Capybara::Screenshot.screenshot_and_save_page
       sleep 2.0
