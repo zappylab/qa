@@ -15,7 +15,8 @@ module GoogleEmailModule
     def verify_email(user, pass, scenario)
       email_name = 'protocols'
       # visit('https://mail.google.com/')       #navigate to gmail
-      visit('https://www.google.com/gmail/')       #navigate to gmail
+      gmail = "accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https://mail.google.com/mail/&ss=1&scc=1&ltmpl=default&ltmplcache=2&emr=1&osid=1"
+      visit(gmail)       #navigate to gmail 'https://www.google.com/gmail/'
       sleep 2.0
       Capybara::Screenshot.screenshot_and_save_page
       sleep 2.0
