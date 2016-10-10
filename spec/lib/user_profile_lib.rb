@@ -12,7 +12,7 @@ module UserProfilePageModule
 		def delete_user
 			find(:xpath, ".//div[@class='main-action-btn']").hover
 			find_all(:xpath, ".//div[@class='action-btns']")[0].click
-			find_all(:xpath, ".//a[@class='deleteaccount']", visible: false)[0].click
+			find_all(:xpath, ".//a[@class='deleteaccount']")[0].click
 			find("#profile-delete-btn").click
 			page.has_selector?("#sign-in-header")
     	end
