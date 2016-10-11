@@ -14,6 +14,9 @@ class GoogleEmailClass
   #   verify_email('protocolsuitest@gmail.com', 'protocols-ui-123', verifying)    
   def verify_email(user, pass, scenario)
     email_name = 'protocols'
+
+    sleep 10.0 # give a chance to email
+
     visit('https://mail.google.com/')       #navigate to gmail
     
     begin
