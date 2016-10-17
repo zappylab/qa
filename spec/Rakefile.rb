@@ -15,6 +15,12 @@ RSpec::Core::RakeTask.new(:spec_3) do |t|
   t.rspec_opts = "--format progress --format RspecJunitFormatter --out protocols_workflow_spec.xml --format html --out protocols_workflow_spec.html"
 end
 
+# To launch tasks under WIN machines:
+# => $env:browser='chrome' ; $env:link='http://je-protocols' ; rake sign_in groups protocols ... etc.
+#
+# To launch tasks under linux machine 
+# => browser=chrome link=http://je-protocols rake sign_in groups protocols ... etc.
+
 #This is list of rake tasks for test suites
 task :sign_in => :spec_1 	# this task describe sign in, sign up and delete account
 task :groups => :spec_2 	# this task describe group workflow: create, delete groups, create groups with invitations and confirm invite

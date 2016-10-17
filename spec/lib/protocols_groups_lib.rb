@@ -20,7 +20,12 @@ class ProtocolsGroupPageClass
 	#   fill_group_name("testGroupName")
 	def fill_group_name(name)
 		$name = name+Time.now.nsec.to_s
-		element = find(:xpath, ".//div[@class='create-name']/input").set($name)
+		element = find(:xpath, ".//div[@class='create-name']/input")
+		element.send_keys($name)
+		element.set("")
+		script = "arguments[0].value = '" + $name + "';"
+		Capybara.current_session.driver.browser.execute_script(script, element.native)
+		sleep 1500.0
 		queryString = ".//div[@class='create-name']/span[contains(text(), '" + $name.downcase + "')]"
 		find(:xpath, ".//div[@class='create-name']/label").click
 		page.has_selector?(:xpath, queryString)
@@ -113,6 +118,8 @@ class ProtocolsGroupPageClass
 	def save_group
 		find("#save-group-btn").click
 		page.has_selector?(:xpath, ".//div[@class='community-overview']//*/span[contains(text(),'" + $name + "')]")
+		puts 'Group' + $name + 'located'
+		return ProtocolsInGroupPageClass.new
 	end
 
 	def find_group(group_name)

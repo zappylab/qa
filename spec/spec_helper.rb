@@ -37,6 +37,7 @@ require_relative './lib/protocols_start_page_lib.rb'
 require_relative './lib/base_lib.rb'
 require_relative './lib/protocols_editor_page.rb'
 require_relative './lib/protocols_page_lib.rb'
+require_relative './lib/groups_in_discussion.rb'
             #connected modules#
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
@@ -107,6 +108,11 @@ RSpec.configure do |config|
 
   config.after(:each) do
     Capybara.reset_sessions!
+    errors = page.driver.browser.manage.logs.get(:browser)
+    if errors.length > 0
+      message = errors.map(&:message).join("\n\n")
+      puts message
+    end
   end
 
   # config.after(:all) do

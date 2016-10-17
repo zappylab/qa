@@ -16,7 +16,7 @@ describe 'Working with GROUPS' do
 		protocolsGroupPage.set_group_access "invitation"
 		protocolsGroupPage.set_group_visibility true
 		$group_name = protocolsGroupPage.fill_group_name "tgn"
-		protocolsGroupPage.save_group
+		inGroup = protocolsGroupPage.save_group
 		protocolsGroupPage.sign_out
 	end
 
@@ -47,7 +47,7 @@ describe 'Working with GROUPS' do
 		groupsPage.set_group_visibility true
 		groupsPage.invite_people "protocolsuitest2@gmail.com, protocolsuitest3@gmail.com"
 		$group_name = groupsPage.fill_group_name "tgn"
-		groupsPage.save_group
+		inGroup = groupsPage.save_group
 		groupsPage.sign_out
 	end
 
@@ -59,6 +59,26 @@ describe 'Working with GROUPS' do
 	it "should CONFIRM invites EMAILS for second user ---NOT SIGNED UP---" do
 		$gmail.verify_email "protocolsuitest3@gmail.com", "protocols-ui-123", "invitation-not-signed"
 		$gmail.verify_email "protocolsuitest3@gmail.com", "protocols-ui-123", "verifying"
+	end
+
+	it 'should CREATE GROUP, ADD DISCUSSION and MAKE POST to DISCUSSION' do
+		$loginPage = LoginPageClass.new
+		$protocolsStartPage =$loginPage.sign_in "protocolsuitest1@gmail.com", "protocols-ui-123"
+		protocolsGroupPage = $protocolsStartPage.go_to_groups
+		protocolsGroupPage.create_group
+		protocolsGroupPage.fill_interest "interest"
+		protocolsGroupPage.fill_about_text "testAbout"
+		protocolsGroupPage.fill_website "http://testsite.com"
+		protocolsGroupPage.fill_location "testLocation"
+		protocolsGroupPage.set_group_access "invitation"
+		protocolsGroupPage.set_group_visibility true
+		$group_name = protocolsGroupPage.fill_group_name "tgn"
+		inGroupPage = protocolsGroupPage.save_group
+		inGroupPage.click_commutiny_menu_item 'Discussions'
+		inGroupPage.click_plus_button_on_item 'Discussions'
+		inDiscussionPage = inGroupPage.add_discussion 'discussion_title', 'discussion_text'
+		inDiscussionPage.add_post 'text_to_post'
+		inDiscussionPage.sign_out
 	end
 end
 

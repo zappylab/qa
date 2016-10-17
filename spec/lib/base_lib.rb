@@ -37,4 +37,24 @@ module BaseLibModule
         page.has_selector?(:xpath, ".//div[@class='files-manager']")
         return ProtocolsIoPageClass.new
     end
+
+    $er_cnt = 0
+    def find_delete_link
+        find(:xpath, ".//div[@class='main-action-btn']").hover
+        find_all(:xpath, ".//div[@class='action-btns']")[0].click
+        begin
+            $link = find("#delete-acc-link", wait: 5)
+            $link.click
+        rescue Capybara::ElementNotFound, NoMethodError
+            puts '  Refreshing user profile page ---> searching delete link once again = ' + $er_cnt.to_s
+            page.driver.browser.navigate.refresh
+            $er_cnt += 1
+            if($er_cnt < 5)
+                self.find_delete_link
+            else
+                puts "Tried to find DELETE LINK for " + $er_cnt.to_s + " times... No result..." 
+                fail
+            end
+        end
+    end
 end

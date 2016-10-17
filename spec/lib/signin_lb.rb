@@ -16,6 +16,7 @@ class LoginPageClass
     visit($link)
     puts "\n    VISITING LINK ---> " + $link + "\n"
     click_link('sign-in-header')
+    find(:xpath, ".//ul[@class='sign-radio radio noselect']/li[2]").click
     puts "\n    Logging in as : " + email + "\n"
     find(:xpath, './/input[@id="email"]').set(email)
     find(:xpath, './/input[@id="pass"]').set(pass)
