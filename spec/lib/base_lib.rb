@@ -6,16 +6,11 @@ module BaseLibModule
     # @example
     #   sign_in
     def sign_out
-        puts '  find avatar   ' + (Time.now).strftime("%H:%M:%S")
+        # puts '  find avatar   ' + (Time.now).strftime("%H:%M:%S")
 		find(:xpath, ".//*[@class='avatar']").click
-        puts '  avatar found   ' + (Time.now).strftime("%H:%M:%S")
         # find(:xpath, ".//span[@class='dropdown-right']/a[contains(@href, '/signout')]").click
-        puts '  find exit   ' + (Time.now).strftime("%H:%M:%S")
 		find(:xpath, ".//span[@class='dropdown-right']/a[contains(text(), 'Sign out')]").click
-        puts '  exit found   ' + (Time.now).strftime("%H:%M:%S")
-        puts '  find selector   ' + (Time.now).strftime("%H:%M:%S")
 		page.has_selector?("#app")
-        puts '  selector found   ' + (Time.now).strftime("%H:%M:%S")
 		return LoginPageClass.new
     end
 
