@@ -14,7 +14,7 @@ describe 'Working with GROUPS' do
 		protocolsGroupPage.fill_website "http://testsite.com"
 		protocolsGroupPage.fill_location "testLocation"
 		protocolsGroupPage.set_group_access "invitation"
-		protocolsGroupPage.set_group_visibility false
+		protocolsGroupPage.set_group_visibility true
 		$group_name = protocolsGroupPage.fill_group_name "tgn"
 		inGroup = protocolsGroupPage.save_group
 		protocolsGroupPage.sign_out
@@ -44,7 +44,7 @@ describe 'Working with GROUPS' do
 		groupsPage.fill_website "http://testsite.com"
 		groupsPage.fill_location "testLocation"
 		groupsPage.set_group_access "invitation"
-		groupsPage.set_group_visibility false
+		groupsPage.set_group_visibility true
 		groupsPage.invite_people "protocolsuitest2@gmail.com, protocolsuitest3@gmail.com"
 		$group_name = groupsPage.fill_group_name "tgn"
 		inGroup = groupsPage.save_group
@@ -71,7 +71,7 @@ describe 'Working with GROUPS' do
 		protocolsGroupPage.fill_website "http://testsite.com"
 		protocolsGroupPage.fill_location "testLocation"
 		protocolsGroupPage.set_group_access "invitation"
-		protocolsGroupPage.set_group_visibility false
+		protocolsGroupPage.set_group_visibility true
 		$group_name = protocolsGroupPage.fill_group_name "tgn"
 		inGroupPage = protocolsGroupPage.save_group
 		inGroupPage.click_commutiny_menu_item 'Discussions'
