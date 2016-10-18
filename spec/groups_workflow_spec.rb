@@ -74,7 +74,7 @@ describe 'Working with GROUPS' do
 		protocolsGroupPage.set_group_visibility true
 		$group_name = protocolsGroupPage.fill_group_name "tgn"
 		inGroupPage = protocolsGroupPage.save_group
-		inGroupPage.click_commutiny_menu_item 'Discussions'
+		# inGroupPage.click_commutiny_menu_item 'Discussions'
 		inGroupPage.click_plus_button_on_item 'Discussions'
 		inDiscussionPage = inGroupPage.add_discussion 'discussion_title', 'discussion_text'
 		inDiscussionPage.add_post 'text_to_post'

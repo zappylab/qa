@@ -52,4 +52,9 @@ module BaseLibModule
             end
         end
     end
+
+    def scroll_to_element(element)
+        script = "arguments[0].scrollIntoView(true);"
+        Capybara.current_session.driver.browser.execute_script(script, element.native)
+    end
 end
