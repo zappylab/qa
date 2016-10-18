@@ -5,7 +5,7 @@ class LoginPageClass
   include Capybara::DSL
   # $link =  'http://je-protocols' #'http://sience:awesome@dev.protocols.io/'
   # def get_link
-    $link = ENV['link']
+  $link = ENV['link']
   # end
   # @param email [String] email for account to login in app
   # @param pass [String] password for account to login in app
@@ -13,8 +13,8 @@ class LoginPageClass
   # @example
   #   sign_in('protocolsuitest@gmail.com', 'protocols-ui-123')
   def sign_in(email, pass)
+    puts "\n    VISITING LINK ---> " + $link.to_s + "\n"
     visit($link)
-    puts "\n    VISITING LINK ---> " + $link + "\n"
     find('#sign-in-header').click
     page.has_selector?(:xpath, ".//div[@class='signin-window']")
     find_all(:xpath, ".//ul[@class='sign-radio radio noselect']/li")[1].click

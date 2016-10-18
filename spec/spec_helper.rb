@@ -106,7 +106,12 @@ RSpec.configure do |config|
      Capybara.reset_sessions! 
   end
 
-  config.after(:each) do
+  config.after(:each) do |example|
+    if example.exception
+      screenshot_name = example.description
+      page.save_screenshot(screenshot_name + ".png")
+    end
+
     Capybara.reset_sessions!
     errors = page.driver.browser.manage.logs.get(:browser)
     if errors.length > 0

@@ -12,7 +12,7 @@ class UserProfilePageClass
 	def delete_user
 		find_delete_link
 		find("#profile-delete-btn").click
-		page.has_selector?("#sign-in-header")
+		find('#sign-in-header')
 	end
 end
 # end

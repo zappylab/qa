@@ -38,8 +38,8 @@ module BaseLibModule
         find(:xpath, ".//div[@class='main-action-btn']").hover
         find_all(:xpath, ".//div[@class='action-btns']")[0].click
         begin
-            $link = find("#delete-acc-link", wait: 5)
-            $link.click
+            $link_element = find("#delete-acc-link", wait: 5)
+            $link_element.click
         rescue Capybara::ElementNotFound, NoMethodError
             puts '  Refreshing user profile page ---> searching delete link once again = ' + $er_cnt.to_s
             page.driver.browser.navigate.refresh

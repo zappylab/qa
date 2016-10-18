@@ -25,7 +25,6 @@ class ProtocolsGroupPageClass
 		element.set("")
 		script = "arguments[0].value = '" + $name + "';"
 		Capybara.current_session.driver.browser.execute_script(script, element.native)
-		sleep 1500.0
 		queryString = ".//div[@class='create-name']/span[contains(text(), '" + $name.downcase + "')]"
 		find(:xpath, ".//div[@class='create-name']/label").click
 		page.has_selector?(:xpath, queryString)
