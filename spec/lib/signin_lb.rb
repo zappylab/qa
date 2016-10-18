@@ -15,8 +15,9 @@ class LoginPageClass
   def sign_in(email, pass)
     visit($link)
     puts "\n    VISITING LINK ---> " + $link + "\n"
-    click_link('sign-in-header')
-    find(:xpath, ".//ul[@class='sign-radio radio noselect']/li[2]").click
+    find('#sign-in-header').click
+    page.has_selector?(:xpath, ".//div[@class='signin-window']")
+    find_all(:xpath, ".//ul[@class='sign-radio radio noselect']/li")[1].click
     puts "\n    Logging in as : " + email + "\n"
     find(:xpath, './/input[@id="email"]').set(email)
     find(:xpath, './/input[@id="pass"]').set(pass)
@@ -34,7 +35,7 @@ class LoginPageClass
     visit($link)
     puts "\n    VISITING LINK ---> " + $link + "\n"
     click_link('sign-up-header')
-    puts "\n    Logging in as : " + email + "\n"
+    puts "\n    Signed up as : " + email + "\n"
     find(:xpath, './/input[@id="email"]').set(email)
     find(:xpath, './/input[@id="pass"]').set("protocols-ui-123")
     find(:xpath, './/button[@class="btn btn-create"]').click
