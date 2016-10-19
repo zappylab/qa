@@ -78,6 +78,7 @@ describe 'Working with GROUPS' do
 		inGroupPage.click_plus_button_on_item 'Discussions'
 		inDiscussionPage = inGroupPage.add_discussion 'discussion_title', 'discussion_text'
 		inDiscussionPage.add_post 'text_to_post'
+		page.save_screenshot("1.png")
 		inDiscussionPage.sign_out
 	end
 end
