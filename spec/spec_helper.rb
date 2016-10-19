@@ -103,8 +103,13 @@ RSpec.configure do |config|
   config.include Capybara::DSL
   config.before(:each) do
       page.driver.browser.manage.timeouts.page_load = 300
-     page.driver.browser.manage.window.resize_to(1920, 1080)
-     page.driver.browser.manage.window.move_to(0, 0)
+      if OS.windows?
+        page.driver.browser.manage.window.maximize
+      else
+        page.driver.browser.manage.window.resize_to(1280, 1024)
+        page.driver.browser.manage.window.move_to(0, 0)
+      end
+
      Capybara.reset_sessions! 
   end
 
