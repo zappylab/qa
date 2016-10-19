@@ -2,7 +2,7 @@ require 'capybara/dsl'
 require_relative './base_lib.rb'
 
 # module ProtocolsIoPageModule
-class ProtocolsIoPageClass
+class MyProtocolsPageClass
 	include BaseLibModule
 
 	def hide_explorer
@@ -22,8 +22,8 @@ class ProtocolsIoPageClass
 	end
 
 	def select_file_by_number(n)
-		files = find_all(:xpath, ".//div[contains(@class, 'files-row') and not( contains(@class, 'line'))]")
-		files[n].click
+		files = find_all(:xpath, ".//div[contains(@class, 'files-row') and not( contains(@class, 'line'))]/div[@class='files-col files-type']")
+		files[n-1].click
 	end
 
 	def open_editor
@@ -37,8 +37,9 @@ class ProtocolsIoPageClass
 		
 	end
 
-	def select_protocol_by_name
-
+	def focus_protocol_by_name(protocol_name)
+		protocol = find(:xpath, ".//div[@class='files-col files-name' and contains(text(), '" + protocol_name +"')]")
+		protocol.click
 	end
 end
 # end

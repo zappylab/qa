@@ -27,10 +27,10 @@ module BaseLibModule
     	return ProtocolsPageClass.new
     end
 
-    def go_to_your_protocols
-        find(:xpath, ".//li/a[text()='Your protocols']").click
+    def go_to_my_protocols
+        find(:xpath, ".//a[@href='/view']").click
         page.has_selector?(:xpath, ".//div[@class='files-manager']")
-        return ProtocolsIoPageClass.new
+        return MyProtocolsPageClass.new
     end
 
     $er_cnt = 0
