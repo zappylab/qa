@@ -102,7 +102,7 @@ RSpec.configure do |config|
 
   config.include Capybara::DSL
   config.before(:each) do
-     page.driver.browser.manage.window.maximize#resize_to(1920,1080)
+     page.driver.browser.manage.window.resize_to(1920,1080)
      Capybara.reset_sessions! 
   end
 
