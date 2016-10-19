@@ -46,9 +46,18 @@ class ProtocolsInGroupPageClass
 	end
 
 	def click_plus_button_on_item(item_name)
-		sleep 5.0
-		find(:xpath, ".//h2[@class='community-content-title' and text()='" +
-			item_name + "']//*/i").click
+		find(:css, ".title")
+		while true do
+			if (page.evaluate_script('jQuery.active == 0').to_s == "true")
+				break;
+			end
+		end
+
+		e = find(:xpath, ".//*[@class='inside-title' and text()='Research interests']");
+		scroll_to_element(e)
+		e1 = find(:xpath, ".//h2[@class='community-content-title' and text()='" +
+			item_name + "']//*/i")
+		e1.click
 	end
 end
 # end
