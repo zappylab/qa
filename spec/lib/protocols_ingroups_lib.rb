@@ -46,6 +46,7 @@ class ProtocolsInGroupPageClass
 	end
 
 	def click_plus_button_on_item(item_name)
+		sleep 3.0
 		find(:xpath, ".//h2[@class='community-content-title' and text()='" +
 			item_name + "']//*/i").click
 	end

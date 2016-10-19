@@ -66,15 +66,15 @@ describe 'Working with GROUPS' do
 		$protocolsStartPage =$loginPage.sign_in "protocolsuitest1@gmail.com", "protocols-ui-123"
 		protocolsGroupPage = $protocolsStartPage.go_to_groups
 		protocolsGroupPage.create_group
+		$group_name = protocolsGroupPage.fill_group_name "tgn"
 		protocolsGroupPage.fill_interest "interest"
 		protocolsGroupPage.fill_about_text "testAbout"
 		protocolsGroupPage.fill_website "http://testsite.com"
 		protocolsGroupPage.fill_location "testLocation"
 		protocolsGroupPage.set_group_access "invitation"
 		protocolsGroupPage.set_group_visibility true
-		$group_name = protocolsGroupPage.fill_group_name "tgn"
 		inGroupPage = protocolsGroupPage.save_group
-		# inGroupPage.click_commutiny_menu_item 'Discussions'
+		inGroupPage.click_commutiny_menu_item 'Discussions'
 		inGroupPage.click_plus_button_on_item 'Discussions'
 		inDiscussionPage = inGroupPage.add_discussion 'discussion_title', 'discussion_text'
 		inDiscussionPage.add_post 'text_to_post'
