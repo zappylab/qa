@@ -104,12 +104,12 @@ RSpec.configure do |config|
 
   config.after(:each) do |example|
     if example.exception
-      example_name = "EXAMPLE NAME: " + example.description.to_s + "\n"
-      example_class = "EXAMPLE CLASS: " + example.exception.class.to_s + "\n"
-      example_message = "EXAMPLE MESSAGE: " + example.exception.message.to_s + "\n"
+      example_name = "EXAMPLE NAME: " + example.description.to_s + "    "
+      example_class = "EXAMPLE CLASS: " + example.exception.class.to_s + "    "
+      example_message = "EXAMPLE MESSAGE: " + example.exception.message.to_s + "    "
       backtrace_array =  example.exception.backtrace
-      backtrace_string = "BACKTRACE: \n" + backtrace_array[5] + "\n" + backtrace_array[6]
-      aggregated_error_str = aggregated_error_str + "\n" + example_name + example_class + example_message + backtrace_string + "\n\n\n"
+      backtrace_string = "BACKTRACE: " + backtrace_array[5] + "   " + backtrace_array[6]
+      aggregated_error_str = aggregated_error_str + "   " + example_name + example_class + example_message + backtrace_string + "  "
 
       screenshot_name = example.description
       page.save_screenshot(screenshot_name + ".png")
@@ -125,10 +125,12 @@ RSpec.configure do |config|
 
   config.after(:all) do
     puts aggregated_error_str
-    string = "errors="+aggregated_error_str
-    if !OS.windows?
-      exec(string)
-    end
+    string = "ERR="+aggregated_error_str
+    out_file = File.new("out.properties ", "w+")
+    #...
+    out_file.puts(string)
+    #...
+    out_file.close
   end
 
   # config.before(:all) do
