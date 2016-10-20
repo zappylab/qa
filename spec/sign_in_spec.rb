@@ -14,7 +14,7 @@ describe 'SIGN UP protocols app, VERIFY acc , SIGN in app, DELETE acc' do
 
 	it 'should SIGN IN the protocols app' do
 		$loginPage = LoginPageClass.new
-		startPage = $loginPage.sign_in "protocolsuitest10@gmail.com", "protocols-ui-123"
+		startPage = $loginPage.sign_in "protocolsuitest@gmail.com", "protocols-ui-123"
 		startPage.sign_out
 	end
 
