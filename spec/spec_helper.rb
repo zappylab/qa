@@ -125,7 +125,7 @@ RSpec.configure do |config|
 
   config.after(:all) do
     puts aggregated_error_str
-    ENV['GIT_URL'] = aggregated_error_str
+    ENV['errors'] = aggregated_error_str
   end
 
   # config.before(:all) do
