@@ -41,5 +41,12 @@ class MyProtocolsPageClass
 		protocol = find(:xpath, ".//div[@class='files-col files-name' and contains(text(), '" + protocol_name +"')]")
 		protocol.click
 	end
+
+	def start_new_protocol
+		editor = window_opened_by do
+			find(:css, ".list-nav").click
+		end
+		return EditProtocolsPageClass.new(editor)
+	end
 end
 # end

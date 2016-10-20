@@ -84,25 +84,13 @@ RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
 
             #connected modules#
-  # config.include LoginPageModule
-  # config.include GoogleEmailModule
-  # config.include UserProfilePageModule
-  # config.include ProtocolsStartPageModule
-  # config.include ProtocolsGroupPageModule
-  # config.include ProtocolsInGroupPageModule
   config.include BaseLibModule
-  # config.include EditProtocolsPageModule
-  # config.include ProtocolsIoPageModule
-  # config.include EditProtocolsPageClass
-
-# config.include SignInClass
-# config.include ProtocolsStartPageClass
-
             #connected modules#
 
   config.include Capybara::DSL
+
   config.before(:each) do
-      page.driver.browser.manage.timeouts.page_load = 300
+      page.driver.browser.manage.timeouts.page_load = 100
       if OS.windows?
         page.driver.browser.manage.window.maximize
       else
@@ -112,9 +100,18 @@ RSpec.configure do |config|
 
      Capybara.reset_sessions! 
   end
+  aggregated_error_str = ""
 
   config.after(:each) do |example|
     if example.exception
+      example_name = "EXAMPLE NAME: " + example.description.to_s + "\n"
+      example_class = "EXAMPLE CLASS: " + example.exception.class.to_s + "\n"
+      example_message = "EXAMPLE MESSAGE: " + example.exception.message.to_s + "\n"
+      backtrace_array =  example.exception.backtrace
+      backtrace_string = "BACKTRACE: \n" + backtrace_array[5] + "\n" + backtrace_array[6]
+      aggregated_error_str = aggregated_error_str + "\n" + example_name + example_class + example_message + backtrace_string + "\n\n\n"
+      puts ENV['errors']
+
       screenshot_name = example.description
       page.save_screenshot(screenshot_name + ".png")
     end
@@ -127,9 +124,9 @@ RSpec.configure do |config|
     end
   end
 
-  # config.after(:all) do
-
-  # end
+  config.after(:all) do
+    puts aggregated_error_str
+  end
 
   # config.before(:all) do
 
