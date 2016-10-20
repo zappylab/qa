@@ -125,7 +125,10 @@ RSpec.configure do |config|
 
   config.after(:all) do
     puts aggregated_error_str
-    ENV['errors'] = aggregated_error_str
+    string = "errors="+aggregated_error_str
+    if !OS.windows?
+      exec(string)
+    end
   end
 
   # config.before(:all) do
