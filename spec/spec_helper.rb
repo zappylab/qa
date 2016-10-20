@@ -110,7 +110,6 @@ RSpec.configure do |config|
       backtrace_array =  example.exception.backtrace
       backtrace_string = "BACKTRACE: \n" + backtrace_array[5] + "\n" + backtrace_array[6]
       aggregated_error_str = aggregated_error_str + "\n" + example_name + example_class + example_message + backtrace_string + "\n\n\n"
-      puts ENV['errors']
 
       screenshot_name = example.description
       page.save_screenshot(screenshot_name + ".png")
@@ -126,6 +125,7 @@ RSpec.configure do |config|
 
   config.after(:all) do
     puts aggregated_error_str
+    ENV['errors'] = aggregated_error_str
   end
 
   # config.before(:all) do
