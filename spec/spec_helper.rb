@@ -52,8 +52,11 @@ Capybara.configure do |config|
     if !(OS.windows?)
       Selenium::WebDriver::Firefox::Binary.path = "/usr/bin/firefox"
     end
+
     Capybara.register_driver :selenium do |app|
-      Capybara::Selenium::Driver.new(app, :browser => :firefox)
+      profile = Selenium::WebDriver::Firefox::Profile.new
+      profile['browser.privatebrowsing.autostart'] = true
+      Capybara::Selenium::Driver.new(app, :browser => :firefox, :profile => profile) #:profile => profile
     end
   elsif ENV['browser'] == 'chrome'
           puts "\n    Running CHROME browser...\n"
@@ -68,7 +71,7 @@ Capybara.configure do |config|
       Selenium::WebDriver::Chrome.path = "/usr/bin/google-chrome"
     end
     Capybara.register_driver :selenium do |app|
-      Capybara::Selenium::Driver.new(app, :browser => :chrome)
+      Capybara::Selenium::Driver.new(app, :browser => :chrome, args: ["--incognito"])
     end
   end
   Capybara.default_max_wait_time = 25
@@ -98,7 +101,8 @@ RSpec.configure do |config|
         page.driver.browser.manage.window.move_to(0, 0)
       end
 
-     Capybara.reset_sessions! 
+     Capybara.reset_sessions!
+     Capybara.current_session.driver.browser.manage.delete_all_cookies
   end
   aggregated_error_str = ""
 
@@ -116,6 +120,7 @@ RSpec.configure do |config|
     end
 
     Capybara.reset_sessions!
+    Capybara.current_session.driver.browser.manage.delete_all_cookies
     errors = page.driver.browser.manage.logs.get(:browser)
     if errors.length > 0
       message = errors.map(&:message).join("\n\n")
