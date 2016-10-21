@@ -71,7 +71,7 @@ Capybara.configure do |config|
       Selenium::WebDriver::Chrome.path = "/usr/bin/google-chrome"
     end
     Capybara.register_driver :selenium do |app|
-      Capybara::Selenium::Driver.new(app, :browser => :chrome, args: ["--incognito"])
+      Capybara::Selenium::Driver.new(app, :browser => :chrome, args: ["--start-maximized --incognito"])
     end
   end
   Capybara.default_max_wait_time = 25
@@ -95,10 +95,10 @@ RSpec.configure do |config|
   config.before(:each) do
       page.driver.browser.manage.timeouts.page_load = 100
       if OS.windows?
-        page.driver.browser.manage.window.maximize
+        # page.driver.browser.manage.window.maximize
       else
-        page.driver.browser.manage.window.resize_to(1280, 1024)
-        page.driver.browser.manage.window.move_to(0, 0)
+        # page.driver.browser.manage.window.resize_to(1280, 1024)
+        # page.driver.browser.manage.window.move_to(0, 0)
       end
 
      Capybara.reset_sessions!
