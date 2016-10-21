@@ -26,6 +26,7 @@ require 'rubygems'
 require "net/http"
 require "uri"
 require "json"
+# require 'ruby-debug'
 
             #connected modules#
 require_relative './lib/signin_lb.rb'
@@ -95,8 +96,11 @@ RSpec.configure do |config|
   config.before(:each) do
       page.driver.browser.manage.timeouts.page_load = 100
       if OS.windows?
-        # page.driver.browser.manage.window.maximize
-      else
+        page.driver.browser.manage.window.maximize
+      else 
+        if ENV['browser'] == 'firefox'
+          page.driver.browser.manage.window.maximize
+        end
         # page.driver.browser.manage.window.resize_to(1280, 1024)
         # page.driver.browser.manage.window.move_to(0, 0)
       end

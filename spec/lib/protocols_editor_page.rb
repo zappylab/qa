@@ -12,6 +12,12 @@ class EditProtocolsPageClass
 		puts 'Switched to new window and has selector'
 	end
 
+	def switch_to_tab_edit
+		cutted_name = tab_name.byteslice(1, tab_name.size)
+		tab = find(:xpath, ".//div[@class='tools-workarea-menu noselect']//*/li[contains(text(), '" + cutted_name +"')]")
+		tab.click 
+	end
+
 	def set_protocol_name(name)
 		find(:xpath, ".//div[@class='editor-header-right']/input").set('')
 		find(:xpath, ".//div[@class='editor-header-right']/input").set(name)
@@ -23,16 +29,22 @@ class EditProtocolsPageClass
 
 	def close_edit
 		find(:xpath, ".//div[@class='btn-list']/button[contains(text(), 'Close')]").click
+		return ViewProtocolsPageClass.new
 	end
 
-	def activate_step(step_numb)
-		steps_list = find_all(:xpath, ".//ul[@class='editor-list']/li")
-		case step_numb
-			when steps_list.size 
-				puts 'YOU ARE TRYING TO PUSH ADD STEP'
-			when (step_numb<steps_list.size) && (step_numb>0)
-				steps_list[step_numb-1].click
-			end
+	def focus_step(step_numb)
+		step = find(:xpath, ".//li[contains(@class,'editor-item')][" + step_numb.to_s + "]")
+		# scroll_to_element(step)
+		Capybara.current_session.driver.browser.action.send_keys(:page_up).perform
+		Capybara.current_session.driver.browser.action.send_keys(:page_up).perform
+		Capybara.current_session.driver.browser.action.send_keys(:page_up).perform
+		step.click
+	end
+
+	def focus_name
+		# scroll_to_element(find(:css, ".editor-header-right"))
+		Capybara.current_session.driver.browser.action.move_to(find(:css, ".editor-header-right").native).perform
+		puts 'scrolled'
 	end
 
 	def set_desc_to_step(desc_text)
@@ -53,6 +65,7 @@ class EditProtocolsPageClass
 
 	def search_and_add_component(component_name)
 		find(:xpath, ".//div[@class='stc-search']/input").set('')#.set(component_name)
+		sleep(0.5)
 		find(:xpath, ".//div[@class='stc-search']/input").set(component_name)
 		xp_query = ".//button[contains(text(), '"+ component_name + "')]"
 		find(:xpath, xp_query).click

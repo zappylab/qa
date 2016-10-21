@@ -43,8 +43,9 @@ class MyProtocolsPageClass
 	end
 
 	def start_new_protocol
+		find(:xpath, ".//button[@class='btn new-sidebar-btn']").click
 		editor = window_opened_by do
-			find(:css, ".list-nav").click
+			find(:xpath, ".//ul[@class='list-nav']/li[2]").click
 		end
 		return EditProtocolsPageClass.new(editor)
 	end
