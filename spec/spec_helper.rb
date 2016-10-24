@@ -55,9 +55,7 @@ Capybara.configure do |config|
     end
 
     Capybara.register_driver :selenium do |app|
-      profile = Selenium::WebDriver::Firefox::Profile.new
-      profile['browser.privatebrowsing.autostart'] = true
-      Capybara::Selenium::Driver.new(app, :browser => :firefox, :profile => profile) #:profile => profile
+      Capybara::Selenium::Driver.new(app, :browser => :firefox) #:profile => profile
     end
   elsif ENV['browser'] == 'chrome'
           puts "\n    Running CHROME browser...\n"

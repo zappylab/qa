@@ -20,7 +20,7 @@ class GoogleEmailClass
     visit('https://mail.google.com/')       #navigate to gmail
     
     begin
-        find(:xpath, ".//a[text()='Sign In']", wait: 7).click
+        find(:xpath, ".//a[text()='Sign In' or text()='Войти']", wait: 7).click
     rescue Capybara::ElementNotFound
     end
 
