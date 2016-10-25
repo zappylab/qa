@@ -28,7 +28,7 @@ class ProtocolsStartPageClass
 		begin
 			menu = find(:xpath, ".//a[@href='#' and text()='Menu ']", wait: 10)
 			menu.click
-			groups = find_all(:xpath, ".//li/a[@href='/groups']", wait: 10)
+			groups = find(:xpath, ".//li/a[@href='/groups']", wait: 10)
 			groups.click
 		rescue Capybara::ElementNotFound
 			find("#groups-link-id").click
