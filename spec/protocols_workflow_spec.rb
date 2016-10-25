@@ -12,6 +12,8 @@ describe 'Working with protocols' do
 		startPage = loginPage.sign_in "vasily@zappylab.com", "NLg6v5JT"
 		myProtocolsPage = startPage.go_to_my_protocols
 		editPage = myProtocolsPage.start_new_protocol
+		editPage.set_protocol_name "test" + (Time.now.nsec).to_s
+		editPage.save_protocol
 		for i in 0..2 do
 			editPage.add_step
 		end
@@ -25,13 +27,19 @@ describe 'Working with protocols' do
 		editPage.save_protocol
 
 		component_names = ["Amount", "Annotation", "Command", "Dataset", "Duration / Timer",
-							"Expected result", "External Link", "Reagent", "Section", "Software package"]
-		for i in 0..9 do
+							"Expected result", "Reagent", "Section", "Software package"] #"External Link",
+		for i in 0..component_names.size-1 do
 			editPage.search_and_add_component component_names[i]
 		end
-		editPage.set_protocol_name "test" + (Time.now.nsec).to_s
-		editPage.save_protocol
+		# editPage.save_protocol
 
+		editPage.fill_component "Amount", "10"
+		editPage.fill_component "Section", "Section"
+		editPage.fill_component "External Link", "http://test"
+		editPage.fill_component "Duration / Timer", "10"
+		editPage.save_protocol
+		viewPage = editPage.close_edit
+		viewPage.sign_out
 	end
 
 	# it 'should modify created protocol' do

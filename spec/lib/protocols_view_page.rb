@@ -2,8 +2,13 @@ require 'capybara/dsl'
 require_relative './base_lib.rb'
 require 'time'
 
-class ViewProtocolsPageClass
+class ProtocolsViewPageClass
 	include BaseLibModule
+
+	def initialize
+		find("#s-mce-img")
+		puts "		LOG: view page initialized"
+	end
 
 	def focus_step_view(numb) 
 		steps = find_all(:xpath, "//div[@id='list-of-step-move']/div")
