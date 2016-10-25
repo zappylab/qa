@@ -24,14 +24,14 @@ describe 'Working with protocols' do
 		editPage.save_protocol
 
 		component_names = ["Amount", "Annotation", "Command", "Dataset", "Duration / Timer",
-							"Expected result", "Reagent", "Section", "Software package", "External Link"] #,
+							"Expected result", "Reagent", "Software package", "External Link"] #,"Section",
 		for i in 0..component_names.size-1 do
 			editPage.search_and_add_component component_names[i]
 		end
 		# editPage.save_protocol
 
 		editPage.fill_component "Amount", "10"
-		editPage.fill_component "Section", "Section"
+		# editPage.fill_component "Section", "Section"
 		editPage.fill_component "External Link", "http://test"
 		editPage.fill_component "Duration / Timer", "10"
 		editPage.save_protocol

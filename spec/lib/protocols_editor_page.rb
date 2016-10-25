@@ -91,10 +91,10 @@ class EditProtocolsPageClass
 	def search_and_add_component(component_name)
 		# find(:xpath, ".//div[@class='stc-search']/input").set('')#.set(component_name)
 		sleep(1.0)
-		find(:xpath, ".//div[@class='stc-search']/input").set(component_name)
+		# find(:xpath, ".//div[@class='stc-search']/input").set(component_name)
 		xp_query = ".//button[contains(text(), '"+ component_name.to_s + "')]"
 		find(:xpath, xp_query).click
-		find(:xpath, ".//div[@class='close-sc']/i").click
+		# find(:xpath, ".//div[@class='close-sc']/i").click
 	end
 
 	def add_component(component_name)
