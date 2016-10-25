@@ -26,9 +26,9 @@ class ProtocolsStartPageClass
 	def go_to_groups
 		# find(:xpath, ".//div[@class='help-btns']/ul/li/i[@class='p-font pf-public']").click #this useful if to events present on start page
 		begin
-			menu = find(:xpath, ".//a[@href='#' and text()='Menu ']", wait: 5)
+			menu = find(:xpath, ".//a[@href='#' and text()='Menu ']", wait: 10)
 			menu.click
-			groups = find(:xpath, ".//a[@href='/groups']", wait: 5)
+			groups = find_all(:xpath, ".//li/a[@href='/groups']", wait: 10)
 			groups.click
 		rescue Capybara::ElementNotFound
 			find("#groups-link-id").click

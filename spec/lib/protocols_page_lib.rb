@@ -5,6 +5,12 @@ require_relative './base_lib.rb'
 class MyProtocolsPageClass
 	include BaseLibModule
 
+	def initialize
+		xpQuery = ".//*[text()='Personal']"
+		puts xpQuery
+		find(:xpath, xpQuery)
+	end
+
 	def hide_explorer
 		find(:css, ".sidebar-collapse.noselect").click
 		page.has_selector?(:xpath, ".//div/span[text()='►']");
