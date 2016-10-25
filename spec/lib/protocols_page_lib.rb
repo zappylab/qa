@@ -47,7 +47,36 @@ class MyProtocolsPageClass
 		editor = window_opened_by do
 			find(:xpath, ".//ul[@class='list-nav']/li[2]").click
 		end
+		current_window.close
 		return EditProtocolsPageClass.new(editor)
+	end
+
+	def delete_protocol
+		find(:xpath, ".//span[text()='Delete']/..").click
+		find(:xpath, ".//button[text()='Delete']").click
+	end
+
+	def publish_protocol(flag)
+		find(:xpath, ".//button[text()='Publish']").click
+		if flag == "unlisted"
+			find(:xpath, ".//label[@for='checkbox-share']").click
+		end
+		find(:xpath, ".//span[text()='Publish']/../..").click
+		while self.check_publishing() != nil do
+			"		LOG: publishing protocol..."
+		end
+		if flag != "unlisted"
+			find(:xpath, ".//span[text()='Close']/..").click
+		end
+	end
+
+	def check_publishing
+		begin
+			spin = find(:xpath, ".//div[@class='protocols-spinner-bars psb-small']", wait: 5)
+			return spin
+		rescue Capybara::ElementNotFound
+			puts '		LOG: Protocol published...'
+		end
 	end
 end
 # end
