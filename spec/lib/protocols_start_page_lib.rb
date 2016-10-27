@@ -26,7 +26,7 @@ class ProtocolsStartPageClass
 	def go_to_groups
 		# find(:xpath, ".//div[@class='help-btns']/ul/li/i[@class='p-font pf-public']").click #this useful if to events present on start page
 		begin
-			menu = find(:xpath, ".//a[@href='#' and text()='Menu ']", wait: 10)
+			menu = find(:xpath, "//i[@class='p-font pf-arrow-down menu-down-arrow']", wait: 10)
 			menu.click
 			groups = find(:xpath, ".//li/a[@href='/groups']", wait: 10)
 			groups.click
