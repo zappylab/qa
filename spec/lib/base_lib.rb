@@ -35,8 +35,7 @@ module BaseLibModule
 
     $er_cnt = 0
     def find_delete_link
-        find(:xpath, ".//div[@class='main-action-btn']").hover
-        find_all(:xpath, ".//div[@class='action-btns']")[0].click
+        find(:xpath, "//*[@class='profile-btns noselect']/button[2]").click
         begin
             $link_element = find("#delete-acc-link", wait: 5)
             $link_element.click
