@@ -73,6 +73,8 @@ class MyProtocolsPageClass
 		end
 		if flag != "unlisted"
 			find(:xpath, ".//span[text()='Close']/..").click
+		else
+			find(:xpath, ".//div[@class='navigation']/button").click
 		end
 	end
 
