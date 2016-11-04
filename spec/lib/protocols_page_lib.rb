@@ -22,7 +22,7 @@ class MyProtocolsPageClass
 	end
 
 	def select_explorer_item_by_name(branch_name)
-		xpQuery = ".//*[text()='" + branch_name + "']"
+		xpQuery = ".//h3[text()='" + branch_name + "']"
 		puts xpQuery
 		find(:xpath, xpQuery).click
 	end

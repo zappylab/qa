@@ -110,6 +110,7 @@ describe 'Working with protocols' do
 		end
 	    editPage.save_protocol
 	    editPage.go_to_my_protocols
+	    myProtocolsPage.select_explorer_item_by_name "My protocols"
 	    myProtocolsPage.focus_protocol_by_name created_protocol
 	    myProtocolsPage.publish_protocol("unlisted")
 	    myProtocolsPage.select_explorer_item_by_name "Unlisted"
