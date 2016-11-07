@@ -45,8 +45,19 @@ class MyProtocolsPageClass
 
 	def focus_protocol_by_name(protocol_name)
 		page.driver.browser.navigate.refresh
-		protocol = find(:xpath, ".//div[@class='files-col files-name' and contains(text(), '" + protocol_name +"')]")
+		protocol = find(:xpath, ".//div[@class='files-col files-name' and contains(text(), '" + protocol_name + "')]")
 		protocol.click
+	end
+
+	def open_view(protocol_name)
+		page.driver.browser.navigate.refresh
+		protocol = find(:xpath, ".//div[@class='files-col files-name' and contains(text(), '" + protocol_name + "')]")
+		manager_page = current_window
+		view_page = window_opened_by do
+			protocol.double_click
+		end
+		manager_page.close
+		return ProtocolsViewPageClass.new(view_page)
 	end
 
 	def start_new_protocol
