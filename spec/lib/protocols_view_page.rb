@@ -5,15 +5,12 @@ require 'time'
 class ProtocolsViewPageClass
 	include BaseLibModule
 
-	def initialize
-		find("#s-mce-img")
-		puts "		LOG: view page initialized"
-
-	end
-
 	def initialize(window)
 		@window = window
 		switch_to_window(@window)
+		find("#s-mce-img")
+		puts "		LOG: view page initialized"
+
 	end
 
 	def focus_step_view(numb) 

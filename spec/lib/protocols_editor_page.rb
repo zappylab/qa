@@ -45,7 +45,7 @@ class EditProtocolsPageClass
 
 	def close_edit
 		find(:xpath, ".//div[@class='btn-list']/button[contains(text(), 'Close')]").click
-		return ProtocolsViewPageClass.new
+		return ProtocolsViewPageClass.new(current_window)
 	end
 
 	def focus_step(step_numb)
