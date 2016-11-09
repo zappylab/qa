@@ -6,13 +6,6 @@ require 'time'
 class ProtocolsGroupPageClass
 	include Capybara::DSL
 	include BaseLibModule
-	# @note This method brings user to EXPLORE page
-	# @example
-	#   create_group
-	def create_group
-		find(:xpath, ".//span[@class='add-content-icon cc-block-inline']/i[@class='p-font pf-plus']").click
-		page.has_selector?("#save-group-btn")
-	end
 
 	# @param name [String] NAME of created group
 	# @note This method fills group's NAME
@@ -122,11 +115,11 @@ class ProtocolsGroupPageClass
 	end
 
 	def find_group(group_name)
-		# find("#header-search-input").set(group_name) this is for je-protocols
-		# find("#header-search-input").native.send_keys(:enter)
+		find("#header-search-input").set(group_name)
+		find("#header-search-input").native.send_keys(:enter)
 		puts 'Searching group ' + group_name 
-		seach_link = ENV['link'] + "/search?key=" + group_name
-		visit(seach_link)
+		# seach_link = ENV['link'] + "/search?key=" + group_name
+		# visit(seach_link)
 
 		page.has_selector?(:xpath, ".//ul[@class='community-search-groups']")# if noSuchElementLocated -> searchResult=null
 	end

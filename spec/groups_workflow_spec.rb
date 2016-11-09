@@ -7,8 +7,7 @@ describe 'Working with GROUPS' do
 	it 'should CREATE new GROUP' do
 		$loginPage = LoginPageClass.new
 		$protocolsStartPage =$loginPage.sign_in "protocolsuitest1@gmail.com", "protocols-ui-123"
-		protocolsGroupPage = $protocolsStartPage.go_to_groups
-		protocolsGroupPage.create_group
+		protocolsGroupPage = $protocolsStartPage.create_group
 		$group_name = protocolsGroupPage.fill_group_name "tgn"
 		protocolsGroupPage.fill_interest "interest"
 		protocolsGroupPage.fill_about_text "testAbout"
@@ -37,8 +36,7 @@ describe 'Working with GROUPS' do
 	it "should CREATE GROUP with invitation" do
 		$loginPage = LoginPageClass.new
 	 	$protocolsStartPage = $loginPage.sign_in "protocolsuitest1@gmail.com", "protocols-ui-123"
-		groupsPage = $protocolsStartPage.go_to_groups
-		groupsPage.create_group
+		groupsPage = $protocolsStartPage.create_group
 		groupsPage.fill_about_text "testAbout"
 		groupsPage.fill_interest "interest"
 		groupsPage.fill_website "http://testsite.com"
@@ -64,8 +62,7 @@ describe 'Working with GROUPS' do
 	it 'should CREATE GROUP, ADD DISCUSSION and MAKE POST to DISCUSSION' do
 		$loginPage = LoginPageClass.new
 		$protocolsStartPage =$loginPage.sign_in "protocolsuitest1@gmail.com", "protocols-ui-123"
-		protocolsGroupPage = $protocolsStartPage.go_to_groups
-		protocolsGroupPage.create_group
+		protocolsGroupPage = $protocolsStartPage.create_group
 		$group_name = protocolsGroupPage.fill_group_name "tgn"
 		protocolsGroupPage.fill_interest "interest"
 		protocolsGroupPage.fill_about_text "testAbout"

@@ -56,4 +56,14 @@ module BaseLibModule
         script = "arguments[0].scrollIntoView(true);"
         Capybara.current_session.driver.browser.execute_script(script, element.native)
     end
+
+    def create_group
+        find(:xpath, ".//div[@class='user-menu-toggle']/i[@class='p-font pf-plus']").click
+        groups_window = window_opened_by do
+            find(:xpath, ".//a[@href='/groups/create' and @target='_blank']").click
+        end
+        current_window.close
+        switch_to_window(groups_window)
+        return ProtocolsGroupPageClass.new
+    end
 end

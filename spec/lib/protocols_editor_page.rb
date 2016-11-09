@@ -137,6 +137,5 @@ class EditProtocolsPageClass
 			puts "YOU ARE TRYING TO MOVE DOWN LAST STEP"
 		end
 	end
-
 end
 # end
