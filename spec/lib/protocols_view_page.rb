@@ -14,13 +14,15 @@ class ProtocolsViewPageClass
 	end
 
 	def focus_step_view(numb) 
-		steps = find_all(:xpath, "//div[@id='list-of-step-move']/div/div[contains(@class, 'step-list-item')]")
+		xpath = ".//div[@id='list-of-step-move']//*/div[contains(@class, 'step-list-item')]"
+		steps = find_all(:xpath, xpath)
 		steps[numb].click
 		puts "Focused step " + numb.to_s + " on view page"
 	end
 
 	def get_steps_count
-		steps = find_all(:xpath, "//div[@id='list-of-step-move']/div/div[contains(@class, 'step-list-item')]")
+		xpath = ".//div[@id='list-of-step-move']//*/div[contains(@class, 'step-list-item')]"
+		steps = find_all(:xpath, xpath)
 		return steps.size
 	end
 
