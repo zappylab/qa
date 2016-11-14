@@ -79,7 +79,7 @@ describe 'Working with protocols' do
 	    editPage.go_to_my_protocols
 	    myProtocolsPage.focus_protocol_by_name created_protocol
 	    myProtocolsPage.publish_protocol("not unlisted")
-	    myProtocolsPage.select_explorer_item_by_name "Published"
+	    myProtocolsPage.select_explorer_item_by_name "My Published"
 	    begin
 	    	puts "		LOG: Start searching created protocol with name = " + created_protocol + " in published"
 	    	myProtocolsPage.focus_protocol_by_name created_protocol
@@ -110,10 +110,10 @@ describe 'Working with protocols' do
 		end
 	    editPage.save_protocol
 	    editPage.go_to_my_protocols
-	    myProtocolsPage.select_explorer_item_by_name "My protocols"
+	    myProtocolsPage.select_explorer_item_by_name "My private"
 	    myProtocolsPage.focus_protocol_by_name created_protocol
 	    myProtocolsPage.publish_protocol("unlisted")
-	    myProtocolsPage.select_explorer_item_by_name "Unlisted"
+	    myProtocolsPage.select_explorer_item_by_name "My unlisted"
 	    begin
 	    	puts "		LOG: Start searching created protocol with name = " + created_protocol + " in unlisted"
 	    	myProtocolsPage.focus_protocol_by_name created_protocol
@@ -144,7 +144,7 @@ describe 'Working with protocols' do
 		end
 	    editPage.save_protocol
 	    editPage.go_to_my_protocols
-	    myProtocolsPage.select_explorer_item_by_name "My protocols"
+	    myProtocolsPage.select_explorer_item_by_name "My private"
 	    myProtocolsPage.focus_protocol_by_name created_protocol
 	    viewPage = myProtocolsPage.open_view created_protocol
 	    viewPage.create_version
