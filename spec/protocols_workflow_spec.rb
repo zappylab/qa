@@ -79,7 +79,7 @@ describe 'Working with protocols' do
 	    editPage.go_to_my_protocols
 	    myProtocolsPage.focus_protocol_by_name created_protocol
 	    myProtocolsPage.publish_protocol("not unlisted")
-	    myProtocolsPage.select_explorer_item_by_name "My Published"
+	    myProtocolsPage.select_explorer_item_by_name "My published"
 	    begin
 	    	puts "		LOG: Start searching created protocol with name = " + created_protocol + " in published"
 	    	myProtocolsPage.focus_protocol_by_name created_protocol
