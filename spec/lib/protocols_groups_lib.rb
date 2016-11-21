@@ -118,7 +118,7 @@ class ProtocolsGroupPageClass
 		find("#header-search-input").set(group_name)
 		find("#header-search-input").native.send_keys(:enter)
 		# find(:xpath, "//*[@id='header-search-input'][1]/following-sibling::i[1]").click
-		puts 'Searching group ' + group_name 
+		puts 'Searching group ' + group_name
 		find(:xpath, ".//ul[@class='community-search-groups']//*/a[@class='gi-name' and text()='" + group_name + "']")# if noSuchElementLocated -> searchResult=null
 	end
 

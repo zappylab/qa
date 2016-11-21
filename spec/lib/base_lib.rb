@@ -66,4 +66,10 @@ module BaseLibModule
         switch_to_window(groups_window)
         return ProtocolsGroupPageClass.new
     end
+
+    def go_to_my_groups
+        find(:xpath, ".//*[@class='avatar']").click
+        find(:xpath, ".//a[text()='My groups']").click
+        return MyGroupsPageClass.new
+    end
 end

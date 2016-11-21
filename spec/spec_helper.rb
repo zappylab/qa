@@ -40,6 +40,7 @@ require_relative './lib/protocols_editor_page.rb'
 require_relative './lib/protocols_page_lib.rb'
 require_relative './lib/groups_in_discussion.rb'
 require_relative './lib/protocols_view_page.rb'
+require_relative './lib/MyGroupsPageClass.rb'
             #connected modules#
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
