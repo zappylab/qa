@@ -9,6 +9,7 @@ class MyProtocolsPageClass
 		xpQuery = ".//h3[text()='My private']"
 		puts xpQuery
 		find(:xpath, xpQuery)
+		find(:xpath, ".//div[@class='files-row'][1]")
 	end
 
 	def hide_explorer
@@ -76,6 +77,8 @@ class MyProtocolsPageClass
 
 	def publish_protocol(flag)
 		find(:xpath, ".//button[text()='Publish']").click
+		find(:xpath, ".//*[@class='community-checkbox public-check'][1]").click
+		find(:xpath, ".//*[@class='community-checkbox public-check'][2]").click
 		if flag == "unlisted"
 			find(:xpath, ".//label[@for='checkbox-share']").click
 		end
@@ -96,6 +99,23 @@ class MyProtocolsPageClass
 			return spin
 		rescue Capybara::ElementNotFound
 			puts '		LOG: Protocol published...'
+		end
+	end
+
+	def create_folders(folder_count, type)
+		for i in 0..folder_count do
+			if i == 0
+				find(:xpath, ".//h3[text()='" + type + "']").right_click
+				find(:xpath, ".//div[@class='ln-item' and text()='New folder']").click
+				find(:xpath, ".//input[@placeholder='Name']").set("test_"+ type + i.to_s)
+				find(:xpath, ".//div[@class='lightbox showElm lightbox-fade']//*/button[@class='btn btn-blue']").click
+			else
+				find(:xpath, ".//h3[text()='test_" + type + (i-1).to_s + "']").click
+				find(:css, ".btn.new-sidebar-btn").click
+				find(:xpath, ".//div[@class='ln-item' and text()='Folder']").click
+				find(:xpath, ".//input[@placeholder='Name']").set("test_" + type + i.to_s)
+				find(:xpath, ".//div[@class='lightbox showElm lightbox-fade']//*/button[@class='btn btn-blue']").click
+			end
 		end
 	end
 end

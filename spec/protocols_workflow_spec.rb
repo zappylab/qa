@@ -3,6 +3,17 @@ require 'time'
 
 describe 'Working with protocols' do
 
+	# it 'should create subfolders' do
+	# 	loginPage = LoginPageClass.new
+	# 	startPage = loginPage.sign_in "vasily@zappylab.com", "NLg6v5JT"
+	# 	myProtocolsPage = startPage.go_to_my_protocols
+	# 	myProtocolsPage.create_folders 3, "My private"
+	# 	myProtocolsPage.create_folders 3, "Bookmarked"
+	# 	myProtocolsPage.create_folders 3, "Shared with me"
+	# 	myProtocolsPage.create_folders 3, "My published"
+	# 	myProtocolsPage.create_folders 3, "My unlisted"
+	# end
+
 	it 'should create new protocol with 3 steps' do
 		loginPage = LoginPageClass.new
 		startPage = loginPage.sign_in "vasily@zappylab.com", "NLg6v5JT"
