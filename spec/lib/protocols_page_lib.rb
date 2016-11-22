@@ -58,6 +58,10 @@ class MyProtocolsPageClass
 		find(:xpath, ".//button[@class='btn default-btn' and text()=' Share']").click
 	end
 
+	def open_transfer_ownership
+		find(:xpath, ".//button/span[text()='Transfer ownership']/..").click
+	end
+
 	def share_with_user(username, protocol_name)
 		self.focus_protocol_by_name(protocol_name)
 		self.open_share
@@ -66,6 +70,16 @@ class MyProtocolsPageClass
 		find(:xpath, ".//button//*/span[text()='Share']/../..").click
 		puts '		LOG: sharing protocols ' + protocol_name.to_s + ' to ' + username.to_s
 		find(:xpath, ".//div[@class='navigation']/button[text()='Close']").click
+	end
+
+	def transfer_ownership(username, protocol_name)
+		self.focus_protocol_by_name(protocol_name)
+		self.open_transfer_ownership
+		find(:css, ".cb-select>input").set(username)
+		find(:xpath, ".//li[@class='select-image']/div").click
+		find(:xpath, ".//button//*/span[text()='Reassign']/../..").click
+		puts '		LOG: reassign protocol... '
+		find(:xpath, ".//div[@class='navigation']/button[text()='Ok']").click
 	end
 
 	def open_view(protocol_name)
