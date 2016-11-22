@@ -174,6 +174,31 @@ describe 'Working with protocols' do
 	    viewPage.delete_annotation @annotation_text
 	end
 
+	it 'should share protocols with other user' do
+		loginPage = LoginPageClass.new
+		startPage = loginPage.sign_in "vasily@zappylab.com", "NLg6v5JT"
+		myProtocolsPage = startPage.go_to_my_protocols
+		editPage = myProtocolsPage.start_new_protocol
+		created_protocol = "test" + (Time.now.nsec).to_s
+		editPage.set_protocol_name created_protocol
+		editPage.save_protocol
+		for i in 0..2 do
+			editPage.add_step
+		end
+		editPage.focus_name
+		editPage.save_protocol
+		for i in 1..4 do
+			editPage.focus_name
+			editPage.focus_step i
+			editPage.set_desc_to_step (Time.now.nsec).to_s
+		end
+	    editPage.save_protocol
+	    editPage.go_to_my_protocols
+	    myProtocolsPage.select_explorer_item_by_name "My private"
+	    myProtocolsPage.focus_protocol_by_name created_protocol
+	    
+	end
+
 	# it 'should modify created protocol' do
 	# 	loginPage = LoginPageClass.new
 	# 	startPage =loginPage.sign_in "vasily@zappylab.com", "NLg6v5JT"

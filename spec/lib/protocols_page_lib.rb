@@ -50,6 +50,10 @@ class MyProtocolsPageClass
 		protocol.click
 	end
 
+	def open_share
+		find(:xpath, ".//button[@class='btn default-btn' and text()=' Share']").click
+	end
+
 	def open_view(protocol_name)
 		page.driver.browser.navigate.refresh
 		protocol = find(:xpath, ".//div[@class='files-col files-name' and contains(text(), '" + protocol_name + "')]")

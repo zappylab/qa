@@ -6,6 +6,8 @@ class MyGroupsPageClass
 	include BaseLibModule
 
 	def search_group(group_name)
+		find(:xpath, ".//*[@id='left_side']//*/li[text()='Joined']").click
+		find("#header-search-input").click
         find("#header-search-input").set(group_name)
         find("#header-search-input").native.send_keys(:enter)
         puts '		LOG: Searching group ' + group_name
