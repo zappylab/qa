@@ -78,21 +78,3 @@ describe 'Working with GROUPS' do
 		inDiscussionPage.sign_out
 	end
 end
-
-# describe 'WORKING with PROTOCOLS' do
-
-# 	it 'should MODIFY created PROTOCOL' do
-# 		# $loginPage.sign_in "vasily@zappylab.com", "NLg6v5JT"
-# 		# $protocolsStartPage.
-# 		$loginPage = LoginPageModule::LoginPageClass.new
-# 		$loginPage.sign_in "vasily@zappylab.com", "NLg6v5JT"
-
-# 		visit 'http://je-protocols/view/test-pr-fngbmbw'
-
-# 		find(:xpath, ".//div[@class='protocol-actions']/a[text()='Edit']").click
-# 		protocolEditPage = EditProtocolsPageModule::EditProtocolsPageClass.new
-# 		protocolEditPage.set_protocol_name 'test Name'
-# 		protocolEditPage.save_protocol
-# 		protocolEditPage.sign_out
-# 	end
-# end

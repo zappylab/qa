@@ -10,8 +10,9 @@ class MyGroupsPageClass
 		find(:xpath, ".//input[@id='header-search-input']", visible: true).click
         find(:xpath, ".//input[@id='header-search-input']", visible: true).set(group_name)
         find(:xpath, ".//input[@id='header-search-input']", visible: true).native.send_keys(:enter)
+        find(:xpath, ".//*[@id='left_side']//*/li[text()='Created']").click
         puts '		LOG: Searching group ' + group_name
-        find(:xpath, ".//ul//*/a[@class='gi-name' and text()='" + group_name + "']")
+        find(:xpath, ".//ul//*/a[text()='" + group_name + "']")
         puts '		LOG: Group ' + group_name + ' found'
     end
 
