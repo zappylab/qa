@@ -10,7 +10,9 @@ module BaseLibModule
 		find(:xpath, ".//*[@class='avatar']").click
         # find(:xpath, ".//span[@class='dropdown-right']/a[contains(@href, '/signout')]").click
 		find(:xpath, ".//span[@class='dropdown-right']/a[contains(text(), 'Sign out')]").click
-		page.has_selector?("#app")
+		find(:css, "#app")
+        Capybara.reset_sessions!
+        Capybara.current_session.driver.browser.manage.delete_all_cookies
 		return LoginPageClass.new
     end
 

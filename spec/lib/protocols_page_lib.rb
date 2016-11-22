@@ -9,7 +9,11 @@ class MyProtocolsPageClass
 		xpQuery = ".//h3[text()='My private']"
 		puts xpQuery
 		find(:xpath, xpQuery)
-		find(:xpath, ".//div[@class='files-row'][1]")
+		begin
+			find(:xpath, ".//div[@class='files-row'][1]")
+		rescue Capybara::ElementNotFound
+			find(:css, "div.empty-folders.empty-folders-hover")
+		end			
 	end
 
 	def hide_explorer
@@ -52,6 +56,16 @@ class MyProtocolsPageClass
 
 	def open_share
 		find(:xpath, ".//button[@class='btn default-btn' and text()=' Share']").click
+	end
+
+	def share_with_user(username, protocol_name)
+		self.focus_protocol_by_name(protocol_name)
+		self.open_share
+		find(:xpath, ".//div[@class='se-input']/input").set(username)
+		find(:xpath, ".//div[@class='se-input']/input/following-sibling::i").click
+		find(:xpath, ".//button//*/span[text()='Share']/../..").click
+		puts '		LOG: sharing protocols ' + protocol_name.to_s + ' to ' + username.to_s
+		find(:xpath, ".//div[@class='navigation']/button[text()='Close']").click
 	end
 
 	def open_view(protocol_name)
