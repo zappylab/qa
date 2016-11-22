@@ -72,7 +72,7 @@ class MyProtocolsPageClass
 
 	def delete_protocol
 		find(:xpath, ".//span[text()='Delete']/..").click
-		find(:xpath, ".//button[text()='Delete']").click
+		find(:xpath, ".//button//*/span[text()='Delete']/../..").click
 	end
 
 	def publish_protocol(flag)
@@ -82,7 +82,7 @@ class MyProtocolsPageClass
 		if flag == "unlisted"
 			find(:xpath, ".//label[@for='checkbox-share']").click
 		end
-		find(:xpath, ".//span[text()='Publish']/../..").click
+		find(:xpath, ".//button//*/span[text()='Publish']/../..").click 
 		while self.check_publishing() != nil do
 			"		LOG: publishing protocol..."
 		end
