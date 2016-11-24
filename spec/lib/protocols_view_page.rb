@@ -37,6 +37,7 @@ class ProtocolsViewPageClass
 		cur_window = Capybara.current_window
 		new_version_tab = window_opened_by do
 			find(:xpath, "//a[text()='New version']").click
+			find(:xpath, ".//div[@class='navigation']/a[3]").click
 		end
 		cur_window.close
 		switch_to_window(new_version_tab)
