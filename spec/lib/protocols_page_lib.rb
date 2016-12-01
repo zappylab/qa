@@ -82,6 +82,10 @@ class MyProtocolsPageClass
 		find(:xpath, ".//div[@class='navigation']/button[text()='Ok']").click
 	end
 
+	def get_forked_count(protocol_name)
+		return count = find_all(:xpath, ".//div[@class='files-col files-name' and contains(text(), '" + protocol_name +"')]/i[@class='p-font pf-fork']").size
+	end
+
 	def open_view(protocol_name)
 		page.driver.browser.navigate.refresh
 		protocol = find(:xpath, ".//div[@class='files-col files-name' and contains(text(), '" + protocol_name + "')]")
