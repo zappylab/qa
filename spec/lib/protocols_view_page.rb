@@ -49,6 +49,7 @@ class ProtocolsViewPageClass
 		for i in 1..3 do
 			Capybara.current_session.driver.browser.action.send_keys(:page_up).perform
 		end
+		find(:css, ".vpt-version").click
 		find(:css, ".vpt-version").hover
 		cur_window = Capybara.current_window
 		new_version_tab = window_opened_by do
