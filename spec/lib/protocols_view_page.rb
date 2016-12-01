@@ -14,6 +14,10 @@ class ProtocolsViewPageClass
 	end
 
 	def create_fork
+		find(:xpath, ".//li[@data-position][1]").click
+		for i in 1..3 do
+			Capybara.current_session.driver.browser.action.send_keys(:page_up).perform
+		end
 		puts '		LOG: creating fork of protocol'
 		find(:xpath, ".//button[@class='up-tipsy']").click
 		find(:xpath, ".//button[text()='Continue']").click
@@ -41,8 +45,10 @@ class ProtocolsViewPageClass
 	end
 
 	def create_version
-		find(:xpath, ".//*[@class='small-title-bold']").click
-		Capybara.current_session.driver.browser.action.send_keys(:page_up).perform
+		find(:xpath, ".//li[@data-position][1]").click
+		for i in 1..3 do
+			Capybara.current_session.driver.browser.action.send_keys(:page_up).perform
+		end
 		find(:css, ".vpt-version").hover
 		cur_window = Capybara.current_window
 		new_version_tab = window_opened_by do
