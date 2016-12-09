@@ -8,7 +8,7 @@ class ProtocolsInGroupPageClass
 	# @example
 	#   go_to_explore
 	def delete_group
-		find(:xpath, "//*[text()='Edit Group Profile']/..").click
+		find(:xpath, "//*[text()='Edit group profile']/..").click
 		element = page.all(:xpath, ".//a[@class='deleteaccount']", :all)[0]
 		# Capybara.current_session.driver.browser.execute_script(script, element.native)
 		element.click
