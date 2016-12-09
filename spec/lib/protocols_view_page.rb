@@ -10,7 +10,16 @@ class ProtocolsViewPageClass
 		switch_to_window(@window)
 		find("#s-mce-img")
 		puts "		LOG: view page initialized"
+	end
 
+	def run_protocol
+		cur_window = Capybara.current_window
+		run_tab = window_opened_by do
+			find(:css, ".vpt-run").click
+		end
+		cur_window.close
+		switch_to_window(run_tab)
+		return RunProtocolsPageClass.new
 	end
 
 	def create_fork

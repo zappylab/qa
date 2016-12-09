@@ -1,5 +1,6 @@
 require_relative './spec_helper.rb'
 require 'time'
+require 'date'
 
 describe 'Working with protocols' do
 
@@ -14,7 +15,7 @@ describe 'Working with protocols' do
 	# 	myProtocolsPage.create_folders 3, "My unlisted"
 	# end
 
-	it 'should create new protocol with 3 steps' do
+	it 'should create new protocol with 4 steps' do
 		loginPage = LoginPageClass.new
 		startPage = loginPage.sign_in "vasily@zappylab.com", "NLg6v5JT"
 		myProtocolsPage = startPage.go_to_my_protocols
@@ -86,9 +87,9 @@ describe 'Working with protocols' do
 			editPage.focus_step i
 			editPage.set_desc_to_step (Time.now.nsec).to_s
 		end
-	    editPage.save_protocol
-	    editPage.go_to_my_protocols
-	    myProtocolsPage.focus_protocol_by_name created_protocol
+		editPage.save_protocol
+		editPage.go_to_my_protocols
+		myProtocolsPage.focus_protocol_by_name created_protocol
 	    myProtocolsPage.publish_protocol("not unlisted")
 	    myProtocolsPage.select_explorer_item_by_name "My published"
 	    begin
@@ -256,17 +257,75 @@ describe 'Working with protocols' do
 			editPage.focus_step i
 			editPage.set_desc_to_step (Time.now.nsec).to_s
 		end
-	    editPage.save_protocol
-	    editPage.go_to_my_protocols
-	    myProtocolsPage.select_explorer_item_by_name "My private"
-	    myProtocolsPage.focus_protocol_by_name created_protocol
-	    viewPage = myProtocolsPage.open_view created_protocol
-	    viewPage.create_fork
-	    viewPage.go_to_my_protocols
-	    myProtocolsPage.select_explorer_item_by_name "My private"
-	    forked_count = myProtocolsPage.get_forked_count created_protocol
+		editPage.save_protocol
+		editPage.go_to_my_protocols
+		myProtocolsPage.select_explorer_item_by_name "My private"
+		myProtocolsPage.focus_protocol_by_name created_protocol
+		viewPage = myProtocolsPage.open_view created_protocol
+		viewPage.create_fork
+		viewPage.go_to_my_protocols
+		myProtocolsPage.select_explorer_item_by_name "My private"
+		forked_count = myProtocolsPage.get_forked_count created_protocol
 	    if forked_count  != 1
 	    	fail
 	    end
 	end
+
+	# it 'should run protocol' do
+	# 	loginPage = LoginPageClass.new
+	# 	startPage = loginPage.sign_in "vasily@zappylab.com", "NLg6v5JT"
+	# 	myProtocolsPage = startPage.go_to_my_protocols
+	# 	editPage = myProtocolsPage.start_new_protocol
+	# 	created_protocol = "test_Run" + (Time.now.nsec).to_s
+	# 	editPage.set_protocol_name created_protocol
+	# 	editPage.save_protocol
+	# 	for i in 0..2 do
+	# 		editPage.add_step
+	# 	end
+	# 	editPage.focus_name
+	# 	editPage.save_protocol
+	# 	for i in 1..4 do
+	# 		editPage.focus_name
+	# 		editPage.focus_step i
+	# 		editPage.set_desc_to_step (Time.now.nsec).to_s
+	# 	end
+	# 	editPage.save_protocol
+	# 	editPage.go_to_my_protocols
+	# 	myProtocolsPage.focus_protocol_by_name created_protocol
+
+	# 	viewPage = myProtocolsPage.open_view created_protocol
+	# 	runPage = viewPage.run_protocol
+	# 	runPage.check_step
+	# 	runPage.focus_step(2)
+	# 	runPage.check_step
+	# 	runPage.focus_step(3)
+	# 	runPage.check_step
+
+	# 	project_name = '000'
+	# 	runPage.save_in_journal project_name
+	# 	journalPage = runPage.view_journal
+	# 	runPage = journalPage.resume_protocol
+
+	# 	runPage.focus_step(4)
+	# 	runPage.open_edit_step
+	# 	runPage.edit_step_desc 'test_step_4'
+	# 	journalPage = runPage.view_journal
+	# 	runPage = journalPage.resume_protocol
+	# 	runPage.check_step
+
+	# 	journalPage = runPage.view_journal
+	# 	if runPage.get_checked_steps.size != journalPage.get_completed_steps
+	# 		begin
+	# 			finished = find(:xpath, ".//span[text()='Finished']")
+	# 			if finished
+	# 				puts '		LOG: protocol status is finished BUT RUN_PAGE_CHECKED_STEPS != JOUR_PAGE_COMPLETED_STEPS'
+	# 			end
+	# 		rescue Capybara::ElementNotFound
+	# 			if finished == nil
+	# 				puts '		LOG: protocol status is NOT finished AND RUN_PAGE_CHECKED_STEPS != JOUR_PAGE_COMPLETED_STEPS'
+	# 			end
+	# 		end
+	# 		fail
+	# 	end
+	# end
 end

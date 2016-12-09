@@ -50,12 +50,12 @@ class MyProtocolsPageClass
 
 	def focus_protocol_by_name(protocol_name)
 		page.driver.browser.navigate.refresh
-		protocol = find(:xpath, ".//div[@class='files-col files-name' and contains(text(), '" + protocol_name + "')]")
+		protocol = find(:xpath, ".//div[contains(@class, 'files-name') and text()='" + protocol_name + "']")
 		protocol.click
 	end
 
 	def open_share
-		find(:xpath, ".//button[@class='btn default-btn' and text()=' Share']").click
+		find(:xpath, ".//button[@class='btn default-btn']//*[@class='p-font pf-face-left']/../..").click
 	end
 
 	def open_transfer_ownership
@@ -83,12 +83,12 @@ class MyProtocolsPageClass
 	end
 
 	def get_forked_count(protocol_name)
-		return count = find_all(:xpath, ".//div[@class='files-col files-name' and contains(text(), '" + protocol_name +"')]/i[@class='p-font pf-fork']").size
+		return count = find_all(:xpath, ".//div[contains(@class, 'files-name') and text()='" + protocol_name + "']/i[@class='p-font pf-fork']").size
 	end
 
 	def open_view(protocol_name)
 		page.driver.browser.navigate.refresh
-		protocol = find(:xpath, ".//div[@class='files-col files-name' and contains(text(), '" + protocol_name + "')]")
+		protocol = find(:xpath, ".//div[contains(@class, 'files-name') and text()='" + protocol_name + "']")
 		manager_page = current_window
 		view_page = window_opened_by do
 			protocol.double_click
