@@ -76,7 +76,7 @@ class MyProtocolsPageClass
 		self.focus_protocol_by_name(protocol_name)
 		self.open_transfer_ownership
 		find(:css, ".cb-select>input").set(username)
-		find(:xpath, ".//li[@class='select-image']/div").click
+		find(:xpath, ".//li[@class='select-image']").click
 		find(:xpath, ".//button//*/span[text()='Reassign']/../..").click
 		puts '		LOG: reassign protocol... '
 		find(:xpath, ".//div[@class='navigation']/button[text()='Ok']").click
