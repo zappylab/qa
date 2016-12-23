@@ -88,7 +88,7 @@ class MyProtocolsPageClass
 
 	def open_view(protocol_name)
 		page.driver.browser.navigate.refresh
-		protocol = find(:xpath, ".//div[contains(@class, 'files-name') and text()='" + protocol_name + "']")
+		protocol = find(:xpath, ".//div[contains(@class, 'files-protocol-name') and text()='" + protocol_name + "']")
 		manager_page = current_window
 		view_page = window_opened_by do
 			protocol.double_click
