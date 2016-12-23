@@ -9,7 +9,7 @@ module BaseLibModule
         # puts '  find avatar   ' + (Time.now).strftime("%H:%M:%S")
 		find(:xpath, ".//*[@class='avatar']").click
         # find(:xpath, ".//span[@class='dropdown-right']/a[contains(@href, '/signout')]").click
-		find(:xpath, ".//span[@class='dropdown-right']/a[contains(text(), 'Sign out')]").click
+		find(:xpath, ".//a[contains(text(), 'Sign out')]").click
 		find(:css, "#app")
         Capybara.reset_sessions!
         Capybara.current_session.driver.browser.manage.delete_all_cookies

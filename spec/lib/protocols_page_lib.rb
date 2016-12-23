@@ -50,7 +50,7 @@ class MyProtocolsPageClass
 
 	def focus_protocol_by_name(protocol_name)
 		page.driver.browser.navigate.refresh
-		protocol = find(:xpath, ".//div[contains(@class, 'files-name') and text()='" + protocol_name + "']")
+		protocol = find(:xpath, ".//div[contains(@class, 'files-protocol-name') and text()='" + protocol_name + "']")
 		protocol.click
 	end
 
@@ -83,7 +83,7 @@ class MyProtocolsPageClass
 	end
 
 	def get_forked_count(protocol_name)
-		return count = find_all(:xpath, ".//div[contains(@class, 'files-name') and text()='" + protocol_name + "']/i[@class='p-font pf-fork']").size
+		return count = find_all(:xpath, ".//div[contains(@class, 'files-protocol-name') and text()='" + protocol_name + "']/i[@class='p-font pf-fork']").size
 	end
 
 	def open_view(protocol_name)
