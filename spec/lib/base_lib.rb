@@ -22,6 +22,7 @@ module BaseLibModule
             find(:xpath, ".//li/a[text()='My profile']/..").click
         else
             find(:css, ".dh-right").click
+        end
 		page.has_selector?("#app")
 		return UserProfilePageClass.new
     end
