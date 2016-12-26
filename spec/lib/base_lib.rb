@@ -18,7 +18,7 @@ module BaseLibModule
 
     def go_to_user_profile
 		find(:xpath, ".//*[@class='avatar']").click
-        if ENV['link'].include? 'dev' || ENV['link'].include? 'je'
+        if (ENV['link'].include? 'dev') || (ENV['link'].include? 'je')
             find(:xpath, ".//li/a[text()='My profile']/..").click
         else
             find(:css, ".dh-right").click
