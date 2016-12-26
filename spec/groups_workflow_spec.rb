@@ -37,6 +37,7 @@ describe 'Working with GROUPS' do
 		$loginPage = LoginPageClass.new
 	 	$protocolsStartPage = $loginPage.sign_in "protocolsuitest1@gmail.com", "protocols-ui-123"
 		groupsPage = $protocolsStartPage.create_group
+		$group_name = groupsPage.fill_group_name "tgn"
 		groupsPage.fill_about_text "testAbout"
 		groupsPage.fill_interest "interest"
 		groupsPage.fill_website "http://testsite.com"
@@ -44,7 +45,6 @@ describe 'Working with GROUPS' do
 		groupsPage.set_group_access "invitation"
 		groupsPage.set_group_visibility true
 		groupsPage.invite_people "protocolsuitest2@gmail.com, protocolsuitest3@gmail.com"
-		$group_name = groupsPage.fill_group_name "tgn"
 		inGroup = groupsPage.save_group
 		groupsPage.sign_out
 	end
