@@ -18,7 +18,7 @@ module BaseLibModule
 
     def go_to_user_profile
 		find(:xpath, ".//*[@class='avatar']").click
-		find(:xpath, ".//li/a[contains(@href, '/researchers') and text()='My profile']").click
+		find(:xpath, ".//li/a[text()='My profile']/..").click
 		page.has_selector?("#app")
 		return UserProfilePageClass.new
     end
