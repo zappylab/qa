@@ -18,7 +18,10 @@ module BaseLibModule
 
     def go_to_user_profile
 		find(:xpath, ".//*[@class='avatar']").click
-		find(:xpath, ".//li/a[text()='My profile']/..").click
+        if ENV['link'].include? 'dev' || ENV['link'].include? 'je'
+            find(:xpath, ".//li/a[text()='My profile']/..").click
+        else
+            find(:css, ".dh-right").click
 		page.has_selector?("#app")
 		return UserProfilePageClass.new
     end
