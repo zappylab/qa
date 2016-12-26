@@ -18,15 +18,15 @@ module BaseLibModule
 
     def go_to_user_profile
 		find(:xpath, ".//*[@class='avatar']").click
-		find(:xpath, ".//*[@class='dh-right']").click
+		find(:xpath, ".//li/a[contains(@href, '/researchers') and text()='My profile']").click
 		page.has_selector?("#app")
 		return UserProfilePageClass.new
     end
 
     def go_to_your_protocols
-    	find(:xpath, ".//*[@class='avatar']").click
-    	find(:xpath, ".//*[@class='dropdown-right']/a[contains(text(), 'protocol')]").click
-    	return ProtocolsPageClass.new
+        find(:xpath, ".//*[@class='avatar']").click
+        find(:xpath, ".//*[@class='dropdown-right']/a[contains(text(), 'protocol')]").click
+        return ProtocolsPageClass.new
     end
 
     def go_to_my_protocols

@@ -82,9 +82,8 @@ class GoogleEmailClass
           find(:xpath, ".//span[contains(text(), 'Confirm membership')]").click
 
           find(:xpath, ".//*[@class='avatar']").click
-          find(:xpath, ".//span[@class='dropdown-right']/a[contains(@href, 'signout')]").click
+          find(:xpath, ".//a[@href='/signout']").click
           page.has_selector?("#app")
-
           protocols_window.close
         when "invitation-not-signed"
           find("#confirm-group-pass-input").set(pass)
