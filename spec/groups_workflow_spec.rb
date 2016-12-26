@@ -49,15 +49,15 @@ describe 'Working with GROUPS' do
 		groupsPage.sign_out
 	end
 
-	# it "should CONFIRM invites EMAILS for first user ---SIGNED UP---" do
-	# 	$gmail = GoogleEmailClass.new
-	# 	$gmail.verify_email "protocolsuitest2@gmail.com", "protocols-ui-123", "invitation-signed"
-	# end
+	it "should CONFIRM invites EMAILS for first user ---SIGNED UP---" do
+		$gmail = GoogleEmailClass.new
+		$gmail.verify_email "protocolsuitest2@gmail.com", "protocols-ui-123", "invitation-signed"
+	end
 
-	# it "should CONFIRM invites EMAILS for second user ---NOT SIGNED UP---" do
-	# 	$gmail.verify_email "protocolsuitest3@gmail.com", "protocols-ui-123", "invitation-not-signed"
-	# 	$gmail.verify_email "protocolsuitest3@gmail.com", "protocols-ui-123", "verifying"
-	# end
+	it "should CONFIRM invites EMAILS for second user ---NOT SIGNED UP---" do
+		$gmail.verify_email "protocolsuitest3@gmail.com", "protocols-ui-123", "invitation-not-signed"
+		$gmail.verify_email "protocolsuitest3@gmail.com", "protocols-ui-123", "verifying"
+	end
 
 	# it 'should CREATE GROUP, ADD DISCUSSION and MAKE POST to DISCUSSION' do
 	# 	$loginPage = LoginPageClass.new

@@ -113,7 +113,7 @@ class ProtocolsGroupPageClass
 	def save_group
 		find(:css, "#save-group-btn").click
 		find(:xpath, ".//div[@class='community-overview']//*/span[contains(text(),'" + @name.to_s + "')]")
-		puts 'Group' + @name.to_s + 'located'
+		puts 'Group ' + @name.to_s + 'located'
 		return ProtocolsInGroupPageClass.new
 	end
 
