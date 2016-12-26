@@ -76,5 +76,5 @@ describe 'Working with GROUPS' do
 	# 	inDiscussionPage = inGroupPage.add_discussion 'discussion_title', 'discussion_text'
 	# 	inDiscussionPage.add_post 'text_to_post'
 	# 	inDiscussionPage.sign_out
-	end
+	# end
 end
