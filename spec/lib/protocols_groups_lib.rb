@@ -12,16 +12,17 @@ class ProtocolsGroupPageClass
 	# @example
 	#   fill_group_name("testGroupName")
 	def fill_group_name(name)
-		$name = name+Time.now.nsec.to_s
-		element = find(:xpath, ".//div[@class='create-name']/input")
-		element.send_keys($name)
-		element.set("")
-		script = "arguments[0].value = '" + $name + "';"
-		Capybara.current_session.driver.browser.execute_script(script, element.native)
-		queryString = ".//div[@class='create-name']/span[contains(text(), '" + $name.downcase + "')]"
-		find(:xpath, ".//div[@class='create-name']/label").click
-		page.has_selector?(:xpath, queryString)
-		return $name
+		@name = name+Time.now.nsec.to_s
+		find(:css, ".create-name>input").set(@name)
+		# element = find(:xpath, ".//div[@class='create-name']/input")
+		# element.send_keys($name)
+		# element.set("")
+		# script = "arguments[0].value = '" + $name + "';"
+		# Capybara.current_session.driver.browser.execute_script(script, element.native)
+		# queryString = ".//div[@class='create-name']/span[contains(text(), '" + $name.downcase + "')]"
+		# find(:xpath, ".//div[@class='create-name']/label").click
+		# page.has_selector?(:xpath, queryString)
+		return @name
 	end
 
 	# @param text [String] textn in ABOUT field of created group
@@ -76,7 +77,7 @@ class ProtocolsGroupPageClass
 	def set_group_access(accsess)
 		case accsess
 		when "invitation"
-			element = page.all(:xpath, ".//ul[@class='radio']")[0].all(:xpath, ".//li")[0].click
+			element = find_all(:xpath, ".//*[@class='cgm-col']")
 		when "membership"
 			page.all(:xpath, ".//ul[@class='radio']")[0].all(:xpath, ".//li")[1].click
 		when "anyone"
@@ -90,9 +91,11 @@ class ProtocolsGroupPageClass
 	#   set_group_visibility(true)
 	def set_group_visibility(visibility)
 		if visibility
-			page.all(:xpath, ".//ul[@class='radio']")[1].all(:xpath, ".//li")[0].click
+			find_all(:xpath, ".//*[@class='cgm-col']")[0].click
+			puts '		LOG: Set group visibility to visible'
 		else
-			page.all(:xpath, ".//ul[@class='radio']")[1].all(:xpath, ".//li")[2].click
+			find_all(:xpath, ".//*[@class='cgm-col']")[1].click
+			puts '		LOG: Set group visibility to invisible'
 		end
 	end
 
@@ -101,7 +104,7 @@ class ProtocolsGroupPageClass
 	# @example
 	#   invite_people("someone@email.com")
 	def invite_people(email)
-		find(:xpath, ".//div[@class='block-data invite-users']/input").set(email)
+		find(:xpath, ".//*[@class='block-data invite-users']/textarea").set(email)
 	end
 
 	# @note This method clicks button to SAVE group
@@ -109,8 +112,8 @@ class ProtocolsGroupPageClass
 	#   save_group
 	def save_group
 		find("#save-group-btn").click
-		page.has_selector?(:xpath, ".//div[@class='community-overview']//*/span[contains(text(),'" + $name.to_s + "')]")
-		puts 'Group' + $name.to_s + 'located'
+		page.has_selector?(:xpath, ".//div[@class='community-overview']//*/span[contains(text(),'" + @name.to_s + "')]")
+		puts 'Group' + @name.to_s + 'located'
 		return ProtocolsInGroupPageClass.new
 	end
 
