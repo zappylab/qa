@@ -49,7 +49,7 @@ class MyProtocolsPageClass
 	end
 
 	def focus_protocol_by_name(protocol_name)
-		# page.driver.browser.navigate.refresh
+		page.driver.browser.navigate.refresh
 		protocol = find(:xpath, ".//div[contains(@class, 'files-protocol-name') and text()='" + protocol_name + "']")
 		protocol.click
 	end
