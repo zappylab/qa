@@ -78,7 +78,7 @@ Capybara.configure do |config|
       Capybara::Selenium::Driver.new(app, :browser => :chrome, args: ["--start-maximized --incognito"])
     end
   end
-  Capybara.default_max_wait_time = 35
+  Capybara.default_max_wait_time = 45
   config.run_server = false
   config.default_driver = :selenium
   config.app_host = 'https://www.google.com' # change url
