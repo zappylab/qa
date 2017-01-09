@@ -31,7 +31,7 @@ module BaseLibModule
 
     def go_to_my_protocols
         find(:xpath, ".//a[@href='/view']").click
-        page.has_selector?(:xpath, ".//div[@class='files-manager']")
+        find(:xpath, ".//div[@class='files-manager']")
         return MyProtocolsPageClass.new
     end
 

@@ -193,13 +193,13 @@ describe 'Working with protocols' do
 			editPage.focus_step i
 			editPage.set_desc_to_step (Time.now.nsec).to_s
 		end
-	    editPage.save_protocol
-	    editPage.go_to_my_protocols
-	    myProtocolsPage.select_explorer_item_by_name "My private"
-	    myProtocolsPage.share_with_user 'protocolsuitest1@gmail.com', created_protocol
-	    myProtocolsPage.sign_out
+		editPage.save_protocol
+		editPage.go_to_my_protocols
+		myProtocolsPage.select_explorer_item_by_name "My private"
+		myProtocolsPage.share_with_user 'protocolsuitest1@gmail.com', created_protocol
+		myProtocolsPage.sign_out
 
-	    loginPage = LoginPageClass.new
+		loginPage = LoginPageClass.new
 		startPage = loginPage.sign_in "protocolsuitest1@gmail.com", "protocols-ui-123"
 		myProtocolsPage = startPage.go_to_my_protocols
 		myProtocolsPage.select_explorer_item_by_name "Shared with me"
