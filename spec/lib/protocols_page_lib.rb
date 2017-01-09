@@ -73,12 +73,16 @@ class MyProtocolsPageClass
 	end
 
 	def transfer_ownership(username, protocol_name)
+		page.driver.browser.navigate.refresh
 		self.focus_protocol_by_name(protocol_name)
 		self.open_transfer_ownership
-		find(:css, ".cb-select>input").set(username)
+		# find(:css, ".cb-select>input").set(username)
+		find(:xpath, ".//div[@class='cb-select']/input").set(username)
+		sleep 2.0
 		find(:xpath, ".//li[@class='select-image']").click
-		find(:xpath, ".//button//*/span[text()='Reassign']/../..").click
-		puts '		LOG: reassign protocol... '
+		sleep 2.0
+		# find(:xpath, ".//div[@class='div-input' and text()='protocolsuitest2@gmail.com protocolsuitest2@gmail.com']")
+		find(:xpath, ".//div[@class='navigation']/button[2]").click
 		find(:xpath, ".//div[@class='navigation']/button[text()='Ok']").click
 	end
 
