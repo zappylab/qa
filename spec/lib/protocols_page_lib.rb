@@ -63,6 +63,7 @@ class MyProtocolsPageClass
 	end
 
 	def share_with_user(username, protocol_name)
+		page.driver.browser.navigate.refresh
 		self.focus_protocol_by_name(protocol_name)
 		self.open_share
 		find(:xpath, ".//div[@class='se-input']/input").set(username)
