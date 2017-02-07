@@ -122,7 +122,7 @@ describe 'Working with protocols' do
 	# 	end
 	#     editPage.save_protocol
 	#     editPage.go_to_my_protocols
-	#     myProtocolsPage.select_explorer_item_by_name "My private"
+	#     myProtocolsPage.select_explorer_item_by_name "My protocols"
 	#     myProtocolsPage.focus_protocol_by_name created_protocol
 	#     myProtocolsPage.publish_protocol("unlisted")
 	#     myProtocolsPage.select_explorer_item_by_name "My unlisted"
@@ -156,7 +156,7 @@ describe 'Working with protocols' do
 		end
 	    editPage.save_protocol
 	    editPage.go_to_my_protocols
-	    myProtocolsPage.select_explorer_item_by_name "My private"
+	    myProtocolsPage.select_explorer_item_by_name "My protocols"
 	    myProtocolsPage.focus_protocol_by_name created_protocol
 	    viewPage = myProtocolsPage.open_view created_protocol
 	    viewPage.create_version
@@ -195,13 +195,14 @@ describe 'Working with protocols' do
 		end
 		editPage.save_protocol
 		editPage.go_to_my_protocols
-		myProtocolsPage.select_explorer_item_by_name "My private"
+		myProtocolsPage.select_explorer_item_by_name "My protocols"
 		myProtocolsPage.share_with_user 'protocolsuitest1@gmail.com', created_protocol
 		myProtocolsPage.sign_out
 
 		loginPage = LoginPageClass.new
 		startPage = loginPage.sign_in "protocolsuitest1@gmail.com", "protocols-ui-123"
 		myProtocolsPage = startPage.go_to_my_protocols
+		myProtocolsPage.select_explorer_item_by_name "Shared with me"
 		myProtocolsPage.select_explorer_item_by_name "Shared with me"
 		myProtocolsPage.focus_protocol_by_name created_protocol
 		myProtocolsPage.sign_out
@@ -227,14 +228,15 @@ describe 'Working with protocols' do
 		end
 	    editPage.save_protocol
 	    editPage.go_to_my_protocols
-	    myProtocolsPage.select_explorer_item_by_name "My private"
-	    myProtocolsPage.transfer_ownership 'protocolsuitest1@gmail.com', created_protocol
+	    myProtocolsPage.select_explorer_item_by_name "My protocols"
+	    myProtocolsPage.transfer_ownership 'protocolsuitest1', created_protocol
 	    myProtocolsPage.sign_out
 
 	    loginPage = LoginPageClass.new
 		startPage = loginPage.sign_in "protocolsuitest1@gmail.com", "protocols-ui-123"
 		myProtocolsPage = startPage.go_to_my_protocols
-		myProtocolsPage.select_explorer_item_by_name "My private"
+		myProtocolsPage.select_explorer_item_by_name "My protocols"
+		myProtocolsPage.select_explorer_item_by_name "My protocols"
 		myProtocolsPage.focus_protocol_by_name created_protocol
 		myProtocolsPage.sign_out
 	end
@@ -259,12 +261,12 @@ describe 'Working with protocols' do
 		end
 		editPage.save_protocol
 		editPage.go_to_my_protocols
-		myProtocolsPage.select_explorer_item_by_name "My private"
+		myProtocolsPage.select_explorer_item_by_name "My protocols"
 		myProtocolsPage.focus_protocol_by_name created_protocol
 		viewPage = myProtocolsPage.open_view created_protocol
 		viewPage.create_fork
 		viewPage.go_to_my_protocols
-		myProtocolsPage.select_explorer_item_by_name "My private"
+		myProtocolsPage.select_explorer_item_by_name "My protocols"
 		forked_count = myProtocolsPage.get_forked_count created_protocol
 	    if forked_count  != 1
 	    	fail

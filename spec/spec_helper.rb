@@ -44,6 +44,7 @@ require_relative './lib/protocols_view_page.rb'
 require_relative './lib/MyGroupsPageClass.rb'
 require_relative './lib/RunProtocolsPageClass.rb'
 require_relative './lib/JournalProtocolsPageClass.rb'
+require_relative './lib/core.rb'
             #connected modules#
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
@@ -85,13 +86,15 @@ Capybara.configure do |config|
 end
 
 RSpec.configure do |config|
+  config.include BaseLibModule
+  config.include Finders
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
   config.expect_with :rspec do |expectations|
 
             #connected modules#
-  config.include BaseLibModule
+
             #connected modules#
 
   config.include Capybara::DSL

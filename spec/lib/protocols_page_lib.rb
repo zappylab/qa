@@ -6,7 +6,7 @@ class MyProtocolsPageClass
 	include BaseLibModule
 
 	def initialize
-		xpQuery = ".//h3[text()='My private']"
+		xpQuery = ".//h3[text()='My protocols']"
 		puts xpQuery
 		find(:xpath, xpQuery)
 		begin
