@@ -34,7 +34,12 @@ class LoginPageClass
   def sign_up(email, pass)
     visit($link)
     puts "\n    VISITING LINK ---> " + $link + "\n"
-    click_link('sign-up-header')
+    begin
+      click_link('sign-up-header')
+    rescue(Capybara::ElementNotFound)
+      click_link('sign-in-header')
+      find(:xpath, ".//div[@class='sign-data']/label").click
+    end
     puts "\n    Signed up as : " + email + "\n"
     find(:xpath, './/input[@id="email"]').set(email)
     find(:xpath, './/input[@id="pass"]').set("protocols-ui-123")
