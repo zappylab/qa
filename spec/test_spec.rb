@@ -6,6 +6,7 @@ describe 'test_1' do
 	it 'test' do
 		visit('http://google.com')
 		element = find_by('div', 'hplogo', 'title', 'Google')
+		find_by_class('btn btn-blue btn-welcome-signup');
 	end
 end
 

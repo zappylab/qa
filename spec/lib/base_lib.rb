@@ -1,4 +1,6 @@
 require 'capybara/dsl'
+require_relative './base_lib.rb'
+require_relative './core.rb'
 
 module BaseLibModule
     include Capybara::DSL

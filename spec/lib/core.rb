@@ -13,6 +13,13 @@ module Finders
 	end
 
 	def find_by_class(classname)
+		if (classname.include? ' ')
+			for i in 0..classname.size do
+				if(classname[i] == ' ')
+					classname[i] = '.'
+				end
+			end
+		end
 		element = nil
 		begin
 			element = find(:css, '.' + classname)

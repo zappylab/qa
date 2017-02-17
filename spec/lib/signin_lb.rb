@@ -1,8 +1,12 @@
 require 'capybara/dsl'
+require_relative './base_lib.rb'
+require_relative './core.rb'
 
 # module LoginPageModule
 class LoginPageClass
   include Capybara::DSL
+  include BaseLibModule
+  include Finders
   # $link =  'http://je-protocols' #'http://sience:awesome@dev.protocols.io/'
   # def get_link
   $link = ENV['link']
@@ -16,12 +20,13 @@ class LoginPageClass
     puts "\n    VISITING LINK ---> " + $link.to_s + "\n"
     visit($link)
     find('#sign-in-header').click
-    page.has_selector?(:xpath, ".//div[@class='signin-window']")
-    find_all(:xpath, ".//ul[@class='sign-radio radio noselect']/li")[1].click
+    # page.has_selector?(:xpath, ".//div[@class='signin-window']")
+    # find_all(:xpath, ".//ul[@class='sign-radio radio noselect']/li")[1].click
     puts "\n    Logging in as : " + email + "\n"
     find(:xpath, './/input[@id="email"]').set(email)
     find(:xpath, './/input[@id="pass"]').set(pass)
-    find(:xpath, './/div[@class="sign-btn"]').click
+    # find(:xpath, './/div[@class="sign-btn"]').click
+    find_by_class('btn btn-create').click
     page.has_selector?(:xpath, './/div[@class="ul-page"]')
     return ProtocolsStartPageClass.new;
   end
@@ -35,20 +40,25 @@ class LoginPageClass
     visit($link)
     puts "\n    VISITING LINK ---> " + $link + "\n"
     begin
-      click_link('sign-up-header')
+      find(:css, '#sign-up-header', wait: 5);
+      find(:xpath, './/input[@id="email"]').set(email)
+      find(:xpath, './/input[@id="pass"]').set("protocols-ui-123")
+      find(:xpath, './/button[@class="btn btn-create"]').click
+      page.has_selector?(:css, ".ca-form")
     rescue(Capybara::ElementNotFound)
-      click_link('sign-in-header')
-      find(:xpath, ".//div[@class='sign-data']/label").click
+      element = find_by('input', '', 'type', 'email');
+      element.set(email)
+      find_by('input', '', 'type', 'password').set(pass)
+      find_by_class("btn btn-blue btn-welcome-signup").click
+      find_by('div', '', 'class', 'sp-right-row');
+      sleep 5.0;
     end
     puts "\n    Signed up as : " + email + "\n"
-    find(:xpath, './/input[@id="email"]').set(email)
-    find(:xpath, './/input[@id="pass"]').set("protocols-ui-123")
-    find(:xpath, './/button[@class="btn btn-create"]').click
-    page.has_selector?(:css, ".ca-form")
   end
 end
 # end
 
-
+  # tag_name, id, attribute, attribute text, InnerHTML
+  # def find_by(*args)
 # t = MyCapybaraTest::Test.new
 # t.test_sign_in_app

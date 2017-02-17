@@ -15,7 +15,7 @@ class GoogleEmailClass
   def verify_email(user, pass, scenario)
     email_name = 'protocols'
 
-    sleep 10.0 # give a chance to email
+    sleep 25.0 # give a chance to email
 
     visit('https://mail.google.com/')       #navigate to gmail
     
