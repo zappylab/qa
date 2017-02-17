@@ -14,6 +14,7 @@ class ProtocolsGroupPageClass
 	def fill_group_name(name)
 		@name = name+Time.now.nsec.to_s
 		find(:css, ".create-name>input").set(@name)
+		find(:css, ".autosize-input-container>input").set(@name)
 		# element = find(:xpath, ".//div[@class='create-name']/input")
 		# element.send_keys($name)
 		# element.set("")
