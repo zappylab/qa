@@ -34,7 +34,8 @@ class GoogleEmailClass
     find('#Email').set(user)   #enter email addr
     click_button('next')                    #next
     find('#Passwd').set(pass) #enter pass
-    click_button('signIn')                  #login email         
+    click_button('signIn')                  #login email
+    puts 'CURRECT GMAIL URL = ' + Capybara.current_session.driver.current_url.to_s         
     find('#sbq').set(email_name)          #set query string to find email sbq gbqfq
     find('#sbq').native.send_keys(:enter)          #query
     xpathString = ".//font[text()='Входящие']"#.//div[@title='Входящие']"
