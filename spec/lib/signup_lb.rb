@@ -35,6 +35,7 @@ class GoogleEmailClass
     click_button('next')                    #next
     find('#Passwd').set(pass) #enter pass
     click_button('signIn')                  #login email
+    sleep 5.0;
     puts 'CURRECT GMAIL URL = ' + Capybara.current_session.driver.current_url.to_s         
     find('#sbq').set(email_name)          #set query string to find email sbq gbqfq
     find('#sbq').native.send_keys(:enter)          #query
