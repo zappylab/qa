@@ -43,8 +43,14 @@ class ProtocolsGroupPageClass
 	#   fill_interest("testInterest")
 	def fill_interest(interest)
 		puts 'VISIBILITY OF PRELOADER = ' + (find(:css, '.mp-block').visible?).to_s
-		while find(:css, '.mp-block').visible? do
-			puts '		LOG: WAITING FOR PRELOADER...'
+		el = nil
+		begin
+			el = find(:css,  '.mp-block')
+			while el do
+				puts '		LOG: WAITING FOR PRELOADER...'
+			end
+		rescue Capybara::ElementNotFound
+			puts '		LOG: PRELOADER WAS NOT FOUND'
 		end
 		find_all(:xpath, ".//div[@class='create-block']/div[@class='block-data']/input")[0].set(interest)
 	end
