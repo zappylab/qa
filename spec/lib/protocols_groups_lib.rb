@@ -42,7 +42,6 @@ class ProtocolsGroupPageClass
 	# @example
 	#   fill_interest("testInterest")
 	def fill_interest(interest)
-		puts 'VISIBILITY OF PRELOADER = ' + (find(:css, '.mp-block').visible?).to_s
 		el = nil
 		begin
 			el = find(:css,  '.mp-block')
