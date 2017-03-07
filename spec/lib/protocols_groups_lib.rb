@@ -42,7 +42,7 @@ class ProtocolsGroupPageClass
 	# @example
 	#   fill_interest("testInterest")
 	def fill_interest(interest)
-		puts 'VISIBILITY OF PRELOADER = ' find(:css, '.mp-block').visible?
+		puts 'VISIBILITY OF PRELOADER = ' + find(:css, '.mp-block').visible?
 		find_all(:xpath, ".//div[@class='create-block']/div[@class='block-data']/input")[0].set(interest)
 	end
 
