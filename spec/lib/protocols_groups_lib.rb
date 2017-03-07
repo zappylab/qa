@@ -48,6 +48,7 @@ class ProtocolsGroupPageClass
 			el = find(:css,  '.mp-block')
 			while el do
 				puts '		LOG: WAITING FOR PRELOADER...'
+				el = find(:css,  '.mp-block')
 			end
 		rescue Capybara::ElementNotFound
 			puts '		LOG: PRELOADER WAS NOT FOUND'
