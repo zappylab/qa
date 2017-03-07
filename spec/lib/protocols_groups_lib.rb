@@ -42,7 +42,7 @@ class ProtocolsGroupPageClass
 	# @example
 	#   fill_interest("testInterest")
 	def fill_interest(interest)
-		page.all(:xpath, ".//div[@class='create-block']/div[@class='block-data']/input")[0].set(interest)
+		find_all(:xpath, ".//div[@class='create-block']/div[@class='block-data']/input")[0].set(interest)
 	end
 
 	# @param site [String] text in WEBSITE field of created group
