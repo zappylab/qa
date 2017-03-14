@@ -105,11 +105,11 @@ RSpec.configure do |config|
         page.driver.browser.manage.window.maximize
       else 
         if ENV['browser'] == 'firefox'
+          page.driver.browser.manage.window.resize_to(1280, 1024)
+          page.driver.browser.manage.window.move_to(0, 0)
+        end
         page.driver.browser.manage.window.resize_to(1280, 1024)
         page.driver.browser.manage.window.move_to(0, 0)
-        end
-        # page.driver.browser.manage.window.resize_to(1280, 1024)
-        # page.driver.browser.manage.window.move_to(0, 0)
       end
 
      Capybara.reset_sessions!
