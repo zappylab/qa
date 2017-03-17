@@ -234,11 +234,9 @@ describe 'Working with protocols' do
 
 	    loginPage = LoginPageClass.new
 		startPage = loginPage.sign_in "protocolsuitest1@gmail.com", "protocols-ui-123"
-		myProtocolsPage = startPage.go_to_my_protocols
-		myProtocolsPage.select_explorer_item_by_name "My protocols"
-		myProtocolsPage.select_explorer_item_by_name "My protocols"
-		myProtocolsPage.focus_protocol_by_name created_protocol
-		myProtocolsPage.sign_out
+		viewPage = startPage.search_notice created_protocol
+		viewPage.confirm_transfer created_protocol
+		viewPage.sign_out
 	end
 
 	it 'should create fork of protocol' do

@@ -55,6 +55,27 @@ class LoginPageClass
     end
     puts "\n    Signed up as : " + email + "\n"
   end
+
+  # def sign_up_gmail(email, pass)
+  #   visit($link)
+  #   puts "\n    VISITING LINK ---> " + $link + "\n"
+  #   gmail_window = window_opened_by do
+  #     find_by_class('p-font pf-google btn-g-welcome').click
+  #   end
+  #   within_window gmail_window do
+  #     find(:css, '#Email').set(email);
+  #     find(:css, '#next').click
+  #     find(:css, '#Passwd').set(pass)
+  #     find(:css, '#signIn').click
+  #     begin
+  #       find(:css, '#submit_approve_access').click
+  #     rescue Capybara::ElementNotFound
+  #       puts "    LOG: currect gmail session exsists and is using..."
+  #     end
+  #   end
+  #   find(:css, '#app')
+  #   find_by_class('user-menu-toggle')
+  # end
 end
 # end
 

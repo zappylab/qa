@@ -49,5 +49,14 @@ class ProtocolsStartPageClass
 		find_all(:xpath, ".//span[contains(text(), 'You are invited to join this group')]/a")[0].click
 		page.has_selector?(:xpath, ".//div[@class='community-logo']")
 	end
+
+	def search_notice(key)
+		landing_page = current_window
+		new_window = window_opened_by do
+			find(:xpath, ".//*[text()='"+ key +"']").click
+		end
+		landing_page.close
+		return ProtocolsViewPageClass.new(new_window)
+	end
 end
 # end

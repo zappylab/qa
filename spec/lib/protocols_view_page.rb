@@ -8,7 +8,14 @@ class ProtocolsViewPageClass
 	def initialize(window)
 		@window = window
 		switch_to_window(@window)
-		find("#s-mce-img")
+		begin
+			find("#s-mce-img")
+		rescue Capybara::ElementNotFound
+			find(".ep-main")
+		rescue Capybara::ElementNotFound
+			puts "		LOG: ERROR LOAD /VIEW PAGE"
+			fail
+		end
 		puts "		LOG: view page initialized"
 	end
 
@@ -60,10 +67,13 @@ class ProtocolsViewPageClass
 		end
 		find(:css, ".vpt-version").click
 		find(:css, ".vpt-version").hover
+
+		find(:xpath, "//a[text()='New version']").click
+			# find(:xpath, ".//div[@class='navigation']/a[3]").click
+		find(:xpath, ".//div[@class='navigation']/button[@class='btn btn-blue']").click
 		cur_window = Capybara.current_window
 		new_version_tab = window_opened_by do
-			find(:xpath, "//a[text()='New version']").click
-			find(:xpath, ".//div[@class='navigation']/a[3]").click
+			find(:xpath, ".//div[@class='navigation']/a[@class='btn btn-blue'][2]").click
 		end
 		cur_window.close
 		switch_to_window(new_version_tab)
@@ -98,6 +108,13 @@ class ProtocolsViewPageClass
 			"/p[text()='" + annotation_text +"']/../../preceding-sibling::div[@class='discussion-module-header']" +
 			 "//*/*[contains(@class, 'pf-trash')]"
 		find(:xpath, xpQuery).click
+	end
+
+	def confirm_transfer(protocol_name)
+		find(".ep-main")
+		find(:xpath, ".//a[text()=' Click to confirm/decline protocol owhership']").click
+		find(:xpath, ".//button[text()='Confirm']").click
+		find(:xpath, ".//h2[text()='" + protocol_name +"']")
 	end
 
 end

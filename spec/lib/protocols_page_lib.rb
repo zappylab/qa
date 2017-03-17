@@ -84,7 +84,7 @@ class MyProtocolsPageClass
 		sleep 2.0
 		# find(:xpath, ".//div[@class='div-input' and text()='protocolsuitest2@gmail.com protocolsuitest2@gmail.com']")
 		find(:xpath, ".//div[@class='navigation']/button[2]").click
-		find(:xpath, ".//div[@class='navigation']/button[text()='Ok']").click
+		find(:xpath, ".//div[@class='navigation']/button[text()='Close']").click
 	end
 
 	def get_forked_count(protocol_name)
@@ -93,6 +93,7 @@ class MyProtocolsPageClass
 
 	def open_view(protocol_name)
 		page.driver.browser.navigate.refresh
+		self.focus_protocol_by_name(protocol_name)
 		protocol = find(:xpath, ".//div[contains(@class, 'files-protocol-name') and text()='" + protocol_name + "']")
 		manager_page = current_window
 		view_page = window_opened_by do

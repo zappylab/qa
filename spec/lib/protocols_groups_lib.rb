@@ -44,10 +44,10 @@ class ProtocolsGroupPageClass
 	def fill_interest(interest)
 		el = nil
 		begin
-			el = find(:css,  '.mp-block')
+			el = find(:css,  '.mp-block', wait: 15)
 			while el do
 				puts '		LOG: WAITING FOR PRELOADER...'
-				el = find(:css,  '.mp-block')
+				el = find(:css,  '.mp-block', wait: 15)
 			end
 		rescue Capybara::ElementNotFound
 			puts '		LOG: PRELOADER WAS NOT FOUND'
