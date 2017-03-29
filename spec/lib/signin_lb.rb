@@ -24,6 +24,7 @@ class LoginPageClass
     # find_all(:xpath, ".//ul[@class='sign-radio radio noselect']/li")[1].click
     puts "\n    Logging in as : " + email + "\n"
     find(:xpath, './/input[@id="email"]').set(email)
+    find(:xpath, './/input[@id="pass"]').click
     find(:xpath, './/input[@id="pass"]').set(pass)
     # find(:xpath, './/div[@class="sign-btn"]').click
     find_by_class('btn btn-create').click
